@@ -23,7 +23,7 @@ create_datasets <- function() {
     data_set <- c(data_set, rep(experiment, n_participants_per_experiment))
     participant_id <- c(participant_id, c(1:n_participants_per_experiment))
     sex <- c(sex, rep(0, n_participants_per_experiment/2), rep(1, n_participants_per_experiment/2))
-    studyID <- unique(edgelist$to)
+    studyID <- c(studyID, rep(studyIDs[experiment,1], n_participants_per_experiment))
     
     # choose your sex 0 and sex 1 participants
     sex_0_sample <- sample(c(1:(n_people/2)), n_participants_per_experiment/2)

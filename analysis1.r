@@ -82,7 +82,7 @@ do_analyses_1 <- function() {
     save_analysis_results_1("pp_citation")
     
     # empty df to save data in each iteration
-    empty_df <- as.data.frame(matrix(0,nrow = 0, ncol = 4)) #ncol ??
+    empty_df <- as.data.frame(matrix(0,nrow = 0, ncol = 4))  #måske problematisk med nrow..... ?????????
     
     # loop
     for (experiment in 1:n_experiments_per_repeat) {
@@ -95,8 +95,17 @@ do_analyses_1 <- function() {
         pp_sig <- 0.1
         
       }else{
-        #pp_u <-  mean(pp from dataframe fra bunden af dette loop (empty_df) men kun for dem der citeres) 
-        #pp_sig <- mean(pp from dataframe fra bunden af dette loop (empty_df) men kun for dem der citeres) 
+        this_edgelist <- edgelist %>% filter(edgelist$to == this_data_set$studyID[1])
+        
+        if(nrow(this_edgelist) > 0){
+          this_empty_df <- empty_df %>% filter(this_edgelist$from %in% empty_df$studyID)
+          pp_u <- mean(this_empty_df$pp_u)
+          pp_sig <- mean(this_empty_df$pp_sig)
+          
+        }else{
+          pp_u <- 0
+          pp_sig <- 0.1
+        }
       }
       
       # update prior in prior_string
@@ -156,7 +165,7 @@ do_analyses_1 <- function() {
       empty_df$pp_u <- fixef(model)[,1][[4]]
       empty_df$pp_sig <- fixef(model)[,2][[4]] 
       empty_df$pp_true <<- c(pp_true, 1)
-      #empty_df$studyID <- ...                #add studyID???
+      empty_df$studyID <- this_data_set$studyID
       
     } # end of for each experiment loop
   }# end of do pp_citation
@@ -388,7 +397,7 @@ do_meta_analysis <- function() {
     pb_true <- c(pb_true, 0)
   }
   
-  if(publication_bias == TRUE){
+  if(publication_bias_meta == TRUE){
     for (rep in 1:n_repeats) {
       #one meta analysis pr repeat
       this_meta_data <- meta_data[meta_data$repeat_id == rep,]

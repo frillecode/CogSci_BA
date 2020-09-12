@@ -15,6 +15,7 @@ number <- 103
 # IDs). Running the simulation creates a citation_chain for passing 
 # the posterior based upon the connections in this edgelist. 
 edgelist <- read_csv("my_edgelist.csv")
+nodes <- read_csv("my_nodes.csv")
 
 ###            ###
 ### Parameters ###
@@ -44,7 +45,16 @@ var_sex_conds <- c(0)
 # Warning! n_participants_per_experiment and n_people need to 
 # be divisible by 4!
 n_repeats <- 1
-n_experiments_per_repeat <- length(unique(c(edgelist$from, edgelist$to)))     #######however, needs to be divisible by 4!!!
+
+if(((length(unique(c(edgelist$from, edgelist$to)))) %% 4) == 0){ #make sure it is divisible by 4
+  n_experiments_per_repeat <- length(unique(c(edgelist$from, edgelist$to))) 
+  studyIDs <- nodes
+}else{
+  n_experiments_per_repeat <- (length(unique(c(edgelist$from, edgelist$to)))) - ((length(unique(c(edgelist$from, edgelist$to)))) %% 4)
+  studyIDs <- nodes[0:n_experiments_per_repeat,]
+}
+studyIDs <- as.data.frame(studyIDs)
+
 n_participants_per_experiment <- 80
 n_trials_per_participant <- 25
 n_people <- 100000
@@ -55,12 +65,13 @@ current_simulation <- 1
 ### Analysis parameters
 # These allow you to choose which analyses do you want
 
-do_pp_citation <- TRUE
-do_pp_linear <- TRUE
+do_pp_citation <- F
+do_pp_linear <- F
 
 ### Publication bias
-publication_bias_sym <- TRUE
-publication_bias_asym == TRUE
+publication_bias_sym <- F
+publication_bias_asym <-  F
+publication_bias_meta <- F
 
 ### Posterior-passing parameters
 # These give you various options wrt posterior passing
@@ -157,17 +168,17 @@ for (i in 1:length(b_bases)) {
               ###
               # This function is in analysis1.R
               # makes a meta-analysis for outputs of b-skep for each repeat
-              meta_analysis <- do_meta_analysis()
+              #meta_analysis <- do_meta_analysis()
               
               ###
               ### Save results for each value of b_sex_conds
               ###
               if(exists("saved_results_final")){
                 saved_results_final <- merge(saved_results, saved_results_final)
-                meta_analysis_final <- merge(meta_analysis, meta_analysis_final)
+                #meta_analysis_final <- merge(meta_analysis, meta_analysis_final)
               } else {
                 saved_results_final <- saved_results
-                meta_analysis_final <- meta_analysis
+                #meta_analysis_final <- meta_analysis
               }
               }
             }
