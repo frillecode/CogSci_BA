@@ -16,7 +16,7 @@ number <- 101
 # creates a citation_chain for passing the posterior based 
 # upon the connections in the edgelist. 
 edgelist <- read_csv("my_edgelist.csv")
-nodes <- unique(c(edgelist$from, edgelist$to)) #make sure that it is ordered !!!
+nodes <- read_csv("my_nodelist.csv") #make sure that it is ordered !!!
 
 ###            ###
 ### Parameters ###
@@ -35,10 +35,13 @@ b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
 b_sex_conds <- c(1) #0, 1, 2
-var_bases <- c(0.5)
-var_sexs <- c(0)
-var_conds <- c(0)
-var_sex_conds <- c(0)
+# var_bases <- c(0.5)
+# var_sexs <- c(0)
+# var_conds <- c(0)
+# var_sex_conds <- c(0)
+var_u <- 0.5
+var_sig <- 0.2
+
 
 ### Size parameters
 # These determine the size of the simulations for every set of

@@ -82,7 +82,7 @@ do_analyses_1 <- function() {
     save_analysis_results_1("pp_citation")
     
     # empty df to save data in each iteration
-    empty_df <- as.data.frame(matrix(0,nrow = 1, ncol = 4))  #måske problematisk med nrow..... ?????????
+    empty_df <- as.data.frame(matrix(0,nrow = 1, ncol = 4))  
     colnames(empty_df) <-  c("pp_u", "pp_sig", "pp_true", "studyID")
     
     # loop
