@@ -8,14 +8,15 @@ source("analysis1.r")
 ###       ###
 ### SETUP ###
 ###       ###
-number <- 103 
+number <- 101
 
 ### Citation chain
-# Here you can insert an edgelist and a list of nodes (unique study 
-# IDs). Running the simulation creates a citation_chain for passing 
-# the posterior based upon the connections in this edgelist. 
+# Here you can insert an edgelist. The nodes represent each 
+# unique study ID from the edgelist. Running the simulation 
+# creates a citation_chain for passing the posterior based 
+# upon the connections in the edgelist. 
 edgelist <- read_csv("my_edgelist.csv")
-nodes <- read_csv("my_nodes.csv")
+nodes <- unique(c(edgelist$from, edgelist$to)) #make sure that it is ordered !!!
 
 ###            ###
 ### Parameters ###
@@ -65,7 +66,7 @@ current_simulation <- 1
 ### Analysis parameters
 # These allow you to choose which analyses do you want
 
-do_pp_citation <- F
+do_pp_citation <- T
 do_pp_linear <- F
 
 ### Publication bias
