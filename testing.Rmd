@@ -70,21 +70,19 @@ IDS_fixed <- IDS[order(IDS$year),]
 ### CHAINS OF TRANSMISSION ###
 ```{r}
 
-nodes <- data.frame(id = unique(c(chain$studyID)))
-#nodes$year <- str_extract(nodes$id, )
-#unique(c(edgelist$from, edgelist$to))
+library(igraph, ggraph)
 
-chain <- chain[-1,]
-
-edges <- as.data.frame(matrix(0, nrow=0, ncol=2))
-colnames(edges) <- c("citations", "studyID")
-edges<- rbind(chain, edges)
-edges <- edges[,-2]
-colnames(edges) <- c("to","from")
+nodes <- data.frame(id = unique(CIT$studyID))
+edges <- data.frame(
+  from = CIT_fixed$citID,
+  to = CIT_fixed$studyID,
+  year = CIT_fixed$year
+)
 
 nodes$id <- as.character(nodes$id)
 edges$from <- as.character(edges$from)
 edges$to <- as.character(edges$to)
+
 
 for (node in nodes$id) {
   edge <- subset(edges, to == node) #filter one node
@@ -102,8 +100,22 @@ for (node in nodes$id) {
   }
 }
 
-write.csv(edges, "my_edgelist.csv", row.names = F)
-write.csv(nodes, "my_nodes.csv", row.names = F)
+#using unfiltered edgelist to calculate degree distribution of cit_network
+edges2 <- as.matrix(edges[,1:2])
+
+graph <- graph_from_edgelist(edges2)
+
+dd <- degree_distribution(graph)
+
+
+#creating BA-network
+graph_ba <- barabasi.game(60, out.dist = dd) 
+        #linear pa - great for citation network
+        #used dd from above as the distribution of the number of edges to add in each time step
+degree_distribution(graph_ba)
+degree(graph_ba)
+plot(graph_ba) 
+
 
 # Polotting
 pacman::p_load(devtools)
@@ -115,74 +127,6 @@ edges_for_plotting <- as.matrix(edges_ordered)
 
 arcplot(edges_for_plotting, cex.labels = 0.6, cex.nodes = 0.7, lwd.arcs = 0.7)
 
-
-
-###### NEW IDEA FOR CHAIN  ######
-
-# List of studyIDs
-studies <- as.data.frame(c(1:200))
-colnames(studies) <- c("studyID")
-
-# Empty dataframe
-chain <- as.data.frame(matrix(0, nrow = 1, ncol = 3)) 
-colnames(chain) <- c("studyID", "n_cits", "citations")
-study <- 1
-
-# Create citations
-while(study < 61){
-
-n_cits <- 0
-citations <- c()    
-
-if (study == 1){ #add first study to chain (no citations)
-  chain$studyID <- study
-  chain$n_cits <- n_cits
-  chain$citations <- NA
-  
-  #update studyID
-  study <- study + 1
-  
-}else{ #for all following studies
-
-  #create citations by looping through each of the previous studies
-      
-    #subset df with all expect this study
-    #previous_studies <- subset(chain, !(studyID == study))
-  
-    #loop through each study
-    for (citedID in unique(chain$studyID)){
-      
-      #binary choice of whether it cites it or not
-      is_cited <- rbinom(1, 1, 0.5)
-      
-      #number of citations
-      n_cits <- n_cits + is_cited
-      
-      if (is_cited == 1){
-      #list of citations
-      citations <- c(citations, citedID)
-       }
-      }
-      
-      #create data frame where citations are split into individual rows
-      if(length(citations)>0){
-      this_chain <- as.data.frame(matrix(0, nrow = length(citations), ncol = 3)) 
-      colnames(this_chain) <- colnames(chain)
-      
-      this_chain$studyID <- study   
-      this_chain$n_cits <- n_cits
-      this_chain$citations <- str_split(citations, ",")
-      
-      #add all of this to a data frame
-      chain <- rbind(chain, this_chain)
-      
-      #update studyID
-      study <- study+1
-      }
-  }      
-}
-
-
 ```
 
 
@@ -192,10 +136,6 @@ if (study == 1){ #add first study to chain (no citations)
 ```{r}
 ### CREATING CHAIN ###
 
-# List of studyIDs
-studies <- as.data.frame(c(1:200))
-colnames(studies) <- c("studyID")
-
 # Empty dataframe
 chain <- as.data.frame(matrix(0, nrow = 1, ncol = 3)) 
 colnames(chain) <- c("studyID", "n_cits", "citations")
@@ -225,8 +165,10 @@ if (study == 1){ #add first study to chain (no citations)
     #loop through each study
     for (citedID in unique(chain$studyID)){
       
-      #binary choice of whether it cites it or not
-      is_cited <- rbinom(1, 1, 0.5)
+      #probability of being cited depends on 
+      p <- length(which(chain$citations == citedID))/(study-1)
+      if(p == 0){p <- 0.5}
+      is_cited <- rbinom(1, 1, p)
       
       #number of citations
       n_cits <- n_cits + is_cited
@@ -254,6 +196,17 @@ if (study == 1){ #add first study to chain (no citations)
       }
   }      
 }
+
+
+
+
+
+for (i in 1:length(nodes$id)){
+  sub <- chain[chain$citations == nodes$id[i],]
+  nodes$n_cited[i] <- nrow(sub)
+}
+
+nodes$n_cited_p <- nodes$n_cited/nrow(nodes)
 
 ### CREATING EDGELIST ###
 
@@ -278,7 +231,7 @@ for (node in nodes$id) {
     cite <- edges %>% filter(to == edge$from[i]) #filter all the studies the node cites
     if(nrow(cite)>0){ #if a study is both cited by the cited study and the node
       for (c in 1:nrow(cite)){
-        if(cite$from[c] %in% edge$from){
+        if(cite$from[c] %in% edge$from){ 
           edges <- edges[!(edges$from == cite$from[c] & edges$to == edge$to[i]),]
         }
       }

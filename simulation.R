@@ -23,7 +23,7 @@ create_datasets <- function() {
     data_set <- c(data_set, rep(experiment, n_participants_per_experiment))
     participant_id <- c(participant_id, c(1:n_participants_per_experiment))
     sex <- c(sex, rep(0, n_participants_per_experiment/2), rep(1, n_participants_per_experiment/2))
-    studyID <- c(studyID, rep(studyIDs[experiment,1], n_participants_per_experiment))
+    studyID <- c(studyID, rep(paste("study", experiment, sep = ""), n_participants_per_experiment))
     
     # choose your sex 0 and sex 1 participants
     sex_0_sample <- sample(c(1:(n_people/2)), n_participants_per_experiment/2)
@@ -48,3 +48,18 @@ create_datasets <- function() {
   return(data.frame(data_set, participant_id, sex, condition, response, studyID))
 
 } 
+
+
+create_citation_chain <- function(list){
+  dd <- degree_distribution(list)
+  chain <- barabasi.game(n_experiments_per_repeat, out.dist = dd) 
+  chain <- as_data_frame(chain)
+  chain <- data.frame(
+    "from" = paste("study", chain$to,sep = ""),
+    "to" = paste("study", chain$from,sep = "")
+  )
+  chain$from <- as.character(chain$from)
+  chain$to <- as.character(chain$to)
+  
+  return(chain)
+}

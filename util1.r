@@ -229,3 +229,19 @@ prepare_for_simulation <- function() {
               ", var_sex_cond: ", var_sex_cond,
               sep=" "))
 }
+
+
+tidy_chain <- function(edges, edge){
+  new_edge <- edge
+  for (i in 1:nrow(edge)){
+    cite <- edges %>% filter(to == edge$from[i]) #filter all the studies the node cites
+    if(nrow(cite)>0){ #if the cited study cites anyone
+      for (c in 1:nrow(cite)){
+        if(cite$from[c] %in% edge$from){ #if a cited study cites the same as the node
+          new_edge <- new_edge[!(new_edge$from == cite$from[c]),] #remove the study it cites
+        }
+      }
+    }
+  }
+  return(new_edge)
+}

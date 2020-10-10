@@ -11,12 +11,11 @@ source("analysis1.r")
 number <- 101
 
 ### Citation chain
-# Here you can insert an edgelist. The nodes represent each 
+# Here you can insert an edgelist. The nodes represent each     ##### skrives om
 # unique study ID from the edgelist. Running the simulation 
 # creates a citation_chain for passing the posterior based 
 # upon the connections in the edgelist. 
-edgelist <- read_csv("my_edgelist.csv")
-nodes <- read_csv("my_nodelist.csv") #make sure that it is ordered !!!
+citation_list <- read_csv("my_edgelist.csv")
 
 ###            ###
 ### Parameters ###
@@ -38,7 +37,7 @@ b_sex_conds <- c(1) #0, 1, 2
 # var_bases <- c(0.5)
 # var_sexs <- c(0)
 # var_conds <- c(0)
-# var_sex_conds <- c(0)
+# var_sex_conds <- c(0)                              ######### skrives ordentligt (evt slet var_bases osv.)
 var_u <- 0.5
 var_sig <- 0.2
 
@@ -49,16 +48,7 @@ var_sig <- 0.2
 # Warning! n_participants_per_experiment and n_people need to 
 # be divisible by 4!
 n_repeats <- 1
-
-if(((length(unique(c(edgelist$from, edgelist$to)))) %% 4) == 0){ #make sure it is divisible by 4
-  n_experiments_per_repeat <- length(unique(c(edgelist$from, edgelist$to))) 
-  studyIDs <- nodes
-}else{
-  n_experiments_per_repeat <- (length(unique(c(edgelist$from, edgelist$to)))) - ((length(unique(c(edgelist$from, edgelist$to)))) %% 4)
-  studyIDs <- nodes[0:n_experiments_per_repeat,]
-}
-studyIDs <- as.data.frame(studyIDs)
-
+n_experiments_per_repeat <- 60
 n_participants_per_experiment <- 80
 n_trials_per_participant <- 25
 n_people <- 100000
@@ -70,12 +60,11 @@ current_simulation <- 1
 # These allow you to choose which analyses do you want
 
 do_pp_citation <- T
-do_pp_linear <- F
+do_pp_linear <- T
 
 ### Publication bias
 publication_bias_sym <- F
 publication_bias_asym <-  F
-publication_bias_meta <- F
 
 ### Posterior-passing parameters
 # These give you various options wrt posterior passing
@@ -137,7 +126,12 @@ for (i in 1:length(b_bases)) {
                 population <- create_population()
                 
                 ###
-                ### Create the datsets for each experiment ###
+                ### Create citation chain
+                ###
+                citation_chain <- create_citation_chain(citation_list)
+                
+                ###
+                ### Create the datasets for each experiment ###
                 ###
                 # This function is in simulation.R
                 # The datasets are stored in a single table with 5 columns:
