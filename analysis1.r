@@ -154,10 +154,9 @@ do_analyses_1 <- function() {
             pb_prob <- pb_prob_pos
           } else if (fixef(model)[,1][[4]] < 0 & fixef(model)[,4][[4]] < 0){ 
             pb_prob <- pb_prob_neg
-          } else { 
+          } else {  # if ((fixef(model)[,1][[4]] >= 0 & fixef(model)[,3][[4]] <= 0) | (fixef(model)[,1][[4]] <= 0 & fixef(model)[,4][[4]] >= 0)) 
             pb_prob <- pb_prob_null
           } 
-          # if ((fixef(model)[,1][[4]] >= 0 & fixef(model)[,3][[4]] <= 0) | (fixef(model)[,1][[4]] <= 0 & fixef(model)[,4][[4]] >= 0)) 
           
           pb <- rbinom(1, size = 1, prob = pb_prob)
           pp_u <- ifelse(pb == 1,
@@ -381,7 +380,7 @@ do_analyses_1 <- function() {
           pb_prob <- pb_prob_pos
         } else if (fixef(model)[,1][[4]] < 0 & fixef(model)[,4][[4]] < 0){ 
           pb_prob <- pb_prob_neg
-        } else { 
+        } else {  # if ((fixef(model)[,1][[4]] >= 0 & fixef(model)[,3][[4]] <= 0) | (fixef(model)[,1][[4]] <= 0 & fixef(model)[,4][[4]] >= 0)) 
           pb_prob <- pb_prob_null
         } 
         
