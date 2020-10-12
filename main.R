@@ -44,7 +44,7 @@ var_sig <- 0.2
 
 ### Size parameters
 # These determine the size of the simulations for every set of
-# parameter values given in the "True values" setction above.
+# parameter values given in the "True values" section above.
 # Warning! n_participants_per_experiment and n_people need to 
 # be divisible by 4!
 n_repeats <- 1
@@ -63,8 +63,18 @@ do_pp_citation <- T
 do_pp_linear <- T
 
 ### Publication bias
-publication_bias_sym <- F
-publication_bias_asym <-  F
+# This allows you to choose whether or not the analysis 
+# should be run with publication bias or not. If you choose
+# to run with publication bias, you can set the values for 
+# the probability of being published depending on direction
+# of effect and whether or not CIs include 0. This also allows
+# you do decide whether you want the publication bias to be 
+# symmetric or asymmetric. 
+do_publication_bias <- F
+
+pb_prob_pos <- 0.9 #prob if b above zero and b lower above zero
+pb_prob_null <- 0.2 #prob if b above zero and b lower below zero OR b below zero and b upper above zero
+pb_prob_neg <- 0.6 #prob if b below zero and b upper below zero
 
 ### Posterior-passing parameters
 # These give you various options wrt posterior passing
