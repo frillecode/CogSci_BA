@@ -197,6 +197,8 @@ for (i in 1:length(b_bases)) {
   }
 } # end of parameter value for loops
 
+#save results
+meta_results <- compile_meta_results()
 
 #save results
 saved <- paste("Results/saved_results_", number, ".csv", sep = "") 
