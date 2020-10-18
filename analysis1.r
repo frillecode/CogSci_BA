@@ -6,7 +6,6 @@ do_analyses_1 <- function() {
     
     ## WITHOUT PUBLICATION BIAS ##
     
-    if (do_publication_bias == FALSE){
     print(">>>>>>>>>>>> Doing posterior passing on linear chain (no pb)")
     # prep columns
     # this function is in util.R
@@ -78,7 +77,7 @@ do_analyses_1 <- function() {
       pp_true <<- c(pp_true, 1)
       
       } # end of for each experiment loop
-    } # end of pp_linear without pb
+     # end of pp_linear without pb
     
     ## WITH PUBLICATION BIAS ##
     
@@ -176,7 +175,6 @@ do_analyses_1 <- function() {
     
     ## WITHOUT PUBLCIATION BIAS ##
     
-    if (do_publication_bias == FALSE){
       print(">>>>>>>>>>>> Doing posterior passing on citation chain (no pb)")
       # prep columns
       # this function is in util.R
@@ -279,7 +277,7 @@ do_analyses_1 <- function() {
         chain_df <- rbind(chain_df, this_chain_df)
         
       } # end of for each experiment loop
-    } # end of pp_citation without pb
+     # end of pp_citation without pb
     
     ## WITH PUBLICATION BIAS ##
     
