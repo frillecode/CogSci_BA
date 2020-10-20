@@ -1,5 +1,5 @@
 prepare_meta_vectors <- function() {
-  total_meta_conditions <<- length(b_bases)*length(b_sexs)*length(b_conds)*length(b_sex_conds)*length(var_bases)*length(var_sexs)*length(var_conds)*length(var_sex_conds)
+  total_meta_conditions <<- length(b_bases)*length(b_sexs)*length(b_conds)*length(b_sex_conds)
   meta_n_repeats <<- rep(n_repeats, total_meta_conditions)
   meta_n_experiments_per_repeat <<- rep(n_experiments_per_repeat, total_meta_conditions)
   meta_n_participants_per_experiment <<- rep(n_participants_per_experiment, total_meta_conditions)
@@ -9,10 +9,6 @@ prepare_meta_vectors <- function() {
   meta_true_sex <<- vector()
   meta_true_cond <<- vector()
   meta_true_sex_cond <<- vector()
-  meta_var_base <<- vector()
-  meta_var_sex <<- vector()
-  meta_var_cond <<- vector()
-  meta_var_sex_cond <<- vector()
   
   meta_base_estimate_pp_l <<- vector()
   meta_sex_estimate_pp_l <<- vector()
@@ -140,6 +136,7 @@ prepare_data_vectors <- function() {
   b_sex_cond_error <<- vector()
   pp_true <<- vector()
   pb_true <<- vector()
+  var_pop <<- vector()  
 }
 
 save_analysis_results_1 <- function(type) {
@@ -150,6 +147,7 @@ save_analysis_results_1 <- function(type) {
   true_cond <<- c(true_cond, rep(b_cond, n_experiments_per_repeat))
   true_sex_cond <<- c(true_sex_cond, rep(b_sex_cond, n_experiments_per_repeat))
   analysis_type <<- c(analysis_type, rep(type, n_experiments_per_repeat))
+  var_pop <<- c(var_pop, rep(population$var_base[1], n_experiments_per_repeat)) 
 }
 
 save_results_meta <- function() {
@@ -160,14 +158,14 @@ save_results_meta <- function() {
                         true_sex, b_sex_p_value, b_sex_lower, b_sex_med, b_sex_upper, b_sex_error,
                         true_cond, b_cond_p_value, b_cond_lower, b_cond_med, b_cond_upper, b_cond_error,
                         true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper, b_sex_cond_error, 
-                        pp_true, pb_true)
+                        pp_true, pb_true, var_pop) 
   saved_results <<- results
   rm(this_data_set, model,
      repeat_id, expt, analysis_type,
      true_base, b_base_lower, b_base_med, b_base_upper,
      true_sex, b_sex_p_value, b_sex_lower, b_sex_med, b_sex_upper,
      true_cond, b_cond_p_value, b_cond_lower, b_cond_med, b_cond_upper, 
-     true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper,
+     true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper, var_pop,
      pos = ".GlobalEnv")
   
   for (rep in 1:n_repeats) {
@@ -421,7 +419,6 @@ compile_meta_results <- function() {
   return(data.frame(meta_n_repeats,meta_n_experiments_per_repeat, meta_n_participants_per_experiment,
                     meta_n_trials_per_participant, meta_n_people,
                     meta_true_base, meta_true_sex, meta_true_cond, meta_true_sex_cond, 
-                    meta_var_base, meta_var_sex, meta_var_cond, meta_var_sex_cond,
                     meta_base_estimate_pp_l, meta_sex_estimate_pp_l, meta_cond_estimate_pp_l, meta_sex_cond_estimate_pp_l,
                     meta_base_estimate_pp_l_pb, meta_sex_estimate_pp_l_pb, meta_cond_estimate_pp_l_pb, meta_sex_cond_estimate_pp_l_pb,
                     meta_base_estimate_pp_c, meta_sex_estimate_pp_c, meta_cond_estimate_pp_c, meta_sex_cond_estimate_pp_c,
@@ -453,7 +450,6 @@ tidy_workspace <- function() {
   rm(meta_n_repeats,meta_n_experiments_per_repeat, meta_n_participants_per_experiment,
      meta_n_trials_per_participant, meta_n_people,
      meta_true_base, meta_true_sex, meta_true_cond, meta_true_sex_cond, 
-     meta_var_base, meta_var_sex, meta_var_cond, meta_var_sex_cond,
      meta_base_estimate_pp_l, meta_sex_estimate_pp_l, meta_cond_estimate_pp_l, meta_sex_cond_estimate_pp_l,
      meta_base_estimate_pp_l_pb, meta_sex_estimate_pp_l_pb, meta_cond_estimate_pp_l_pb, meta_sex_cond_estimate_pp_l_pb,
      meta_base_estimate_pp_c, meta_sex_estimate_pp_c, meta_cond_estimate_pp_c, meta_sex_cond_estimate_pp_c,
@@ -480,7 +476,6 @@ tidy_workspace <- function() {
      meta_base_uncertainty_pp_c_p, meta_sex_uncertainty_pp_c_p, meta_cond_uncertainty_pp_c_p, meta_sex_cond_uncertainty_pp_c_p,
      meta_base_uncertainty_pp_c_pb_p, meta_sex_uncertainty_pp_c_pb_p, meta_cond_uncertainty_pp_c_pb_p, meta_sex_cond_uncertainty_pp_c_pb_p,
      b_base, b_bases, b_cond, b_conds, b_sex, b_sexs, b_sex_cond, b_sex_conds,
-     var_base, var_bases, var_cond, var_conds, var_Sex, var_sexs, var_sex_cond, var_sex_conds,
      pos = ".GlobalEnv")
 }
 
@@ -489,26 +484,14 @@ prepare_for_simulation <- function() {
   b_sex <<- b_sexs[j]
   b_cond <<- b_conds[k]
   b_sex_cond <<- b_sex_conds[l]
-  var_base <<- var_bases[m]
-  var_sex <<- var_sexs[n]
-  var_cond <<- var_conds[o]
-  var_sex_cond <<- var_sex_conds[p]
   meta_true_base <<- c(meta_true_base, rep(b_base, n_repeats))
   meta_true_sex <<- c(meta_true_sex, rep(b_sex, n_repeats))
   meta_true_cond <<- c(meta_true_cond, rep(b_cond, n_repeats))
   meta_true_sex_cond <<- c(meta_true_sex_cond, rep(b_sex_cond, n_repeats))
-  meta_var_base <<- c(meta_var_base, rep(var_base, n_repeats))
-  meta_var_sex <<- c(meta_var_sex, rep(var_sex, n_repeats))
-  meta_var_cond <<- c(meta_var_cond, rep(var_cond, n_repeats))
-  meta_var_sex_cond <<- c(meta_var_sex_cond, rep(var_sex_cond, n_repeats))
   print(paste("running simulation with parameters: b_base: ", b_base,
               ", b_sex: ", b_sex,
               ", b_cond: ", b_cond,
               ", b_sex_cond: ", b_sex_cond,
-              ", var_base: ", var_base,
-              ", var_sex: ", var_sex,
-              ", var_cond: ", var_cond,
-              ", var_sex_cond: ", var_sex_cond,
               sep=" "))
 }
 
