@@ -10,13 +10,6 @@ source("analysis1.r")
 ###       ###
 number <- 101
 
-### Citation chain
-# Here you can insert an edgelist. The nodes represent each     ##### skrives om
-# unique study ID from the edgelist. Running the simulation 
-# creates a citation_chain for passing the posterior based 
-# upon the connections in the edgelist. 
-citation_list <- read_csv("my_edgelist.csv")
-
 ###            ###
 ### Parameters ###
 ###            ###
@@ -26,21 +19,27 @@ citation_list <- read_csv("my_edgelist.csv")
 # putting multiple values in will cause simulations to run
 # with different true values.
 # The first four give the mean value of the four parameters
-# that determine participant behavior. The next four give
-# the variance in these parameters.
-# Warning! var_sexs, var_conds and var_sex_conds do not currently
-# do anything!
+# that determine participant behavior. The next two allow you
+# to determine the mean and sd of the normal distribution that
+# that the individual variance of the simulated population 
+# will be randomly drawn from for each repeat. 
 b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
 b_sex_conds <- c(1) #0, 1, 2
-# var_bases <- c(0.5)
-# var_sexs <- c(0)
-# var_conds <- c(0)
-# var_sex_conds <- c(0)                              ######### skrives ordentligt (evt slet var_bases osv.)
-var_u <- 0.5
-var_sig <- 0.2
 
+var_u <- 0.5 #mean
+var_sig <- 0.2 #sd
+
+### Citation chain
+# Here you can insert an edgelist. Based on the degree 
+# distribution of this edgelist, a citation_chain where
+# each node represents a study and the connections represent 
+# citations between studies through which posteriors can
+# be passed. The size of this citation_chain can be specified
+# in size parameters below (number of nodes specified in 
+# n_experiments_per_repeat below). 
+citation_list <- read_csv("my_edgelist.csv")
 
 ### Size parameters
 # These determine the size of the simulations for every set of
@@ -58,7 +57,6 @@ current_simulation <- 1
 
 ### Analysis parameters
 # These allow you to choose which analyses do you want
-
 do_pp_citation <- T
 do_pp_linear <- T
 
@@ -82,8 +80,7 @@ pb_prob_neg <- 0.6 #prob if b below zero and b upper below zero
 pp_final_expt_only <- T
 
 ### Vectors to store meta-data
-# This function is in util.R
-# It creates a number of vectors that will be
+# This function is in util.R It creates a number of vectors that will be
 # filled with data. Each set of simulations for a set of parameters
 # creates a results table. At the end of each set of parameter values,
 # the meta_results table is filled in with a single row that gives data
@@ -99,10 +96,6 @@ for (i in 1:length(b_bases)) {
   for (j in 1:length(b_sexs)) {
     for (k in 1:length(b_conds)) {
       for (l in 1:length(b_sex_conds)) {
-        for (m in 1:length(var_bases)) {
-          for (n in 1:length(var_sexs)) {
-            for (o in 1:length(var_conds)) {
-              for (p in 1:length(var_sex_conds)) {
 
               ### Set up values for the simulation
               # this function is in util.R
@@ -170,40 +163,27 @@ for (i in 1:length(b_bases)) {
               # now we have all our results so we parse them as a single table and collapse
               # each repeat simulation (i.e. each run of experiments) into a single entry
               save_results_meta()
-
-              ###
-              ### Do meta-analysis          ----------------- do not do this
-              ###
-              # This function is in analysis1.R
-              # makes a meta-analysis for outputs of b-skep for each repeat
-              #meta_analysis <- do_meta_analysis()
               
               ###
               ### Save results for each value of b_sex_conds
               ###
               if(exists("saved_results_final")){
                 saved_results_final <- merge(saved_results, saved_results_final)
-                #meta_analysis_final <- merge(meta_analysis, meta_analysis_final)
               } else {
                 saved_results_final <- saved_results
-                #meta_analysis_final <- meta_analysis
               }
               }
             }
           }
-        }
-      }
-    }
-  }
 } # end of parameter value for loops
 
 #save results
 meta_results <- compile_meta_results()
 
 #save results
-saved <- paste("Results/saved_results_", number, ".csv", sep = "") 
-meta_a <- paste("Results/meta_analysis_results_", number, ".csv", sep = "")
-write.csv(saved_results_final, saved)
-write.csv(meta_analysis_final, meta_a)
+saved <- paste("Results/saved_results_", number, ".csv", sep = "")          ###### ??????
+meta_a <- paste("Results/meta_analysis_results_", number, ".csv", sep = "") ###### ??????
+write.csv(saved_results_final, saved)                                       ###### ??????
+write.csv(meta_analysis_final, meta_a)                                      ###### ??????
 
 #tidy_workspace()
