@@ -134,8 +134,7 @@ prepare_data_vectors <- function() {
   b_sex_cond_med <<- vector()
   b_sex_cond_upper <<- vector()
   b_sex_cond_error <<- vector()
-  pp_true <<- vector()
-  pb_true <<- vector()
+  pub_true <<- vector()
   var_pop <<- vector()  
 }
 
@@ -158,7 +157,7 @@ save_results_meta <- function() {
                         true_sex, b_sex_p_value, b_sex_lower, b_sex_med, b_sex_upper, b_sex_error,
                         true_cond, b_cond_p_value, b_cond_lower, b_cond_med, b_cond_upper, b_cond_error,
                         true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper, b_sex_cond_error, 
-                        pp_true, pb_true, var_pop) 
+                        pub_true, pp_n, var_pop) 
   saved_results <<- results
   rm(this_data_set, model,
      repeat_id, expt, analysis_type,
