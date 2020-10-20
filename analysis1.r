@@ -52,8 +52,6 @@ do_analyses_1 <- function() {
       )
       
       # save the results of the pp
-      pb_true <<- c(pb_true, 0)
-      
       b_base_med <<- c(b_base_med, fixef(model)[,1][[1]])
       b_sex_med <<- c(b_sex_med, fixef(model)[,1][[2]])
       b_cond_med <<- c(b_cond_med, fixef(model)[,1][[3]])
@@ -135,8 +133,6 @@ do_analyses_1 <- function() {
           )
           
           # save the results of the pp
-          pb_true <<- c(pb_true, 1)
-          
           b_base_med <<- c(b_base_med, fixef(model)[,1][[1]])
           b_sex_med <<- c(b_sex_med, fixef(model)[,1][[2]])
           b_cond_med <<- c(b_cond_med, fixef(model)[,1][[3]])
@@ -263,8 +259,6 @@ do_analyses_1 <- function() {
         )
         
         # save the results of the pp
-        pb_true <<- c(pb_true, 0)
-        
         b_base_med <<- c(b_base_med, fixef(model)[,1][[1]])
         b_sex_med <<- c(b_sex_med, fixef(model)[,1][[2]])
         b_cond_med <<- c(b_cond_med, fixef(model)[,1][[3]])
@@ -381,8 +375,6 @@ do_analyses_1 <- function() {
         )
         
         # save the results of the pp
-        pb_true <<- c(pb_true, 1)
-        
         b_base_med <<- c(b_base_med, fixef(model)[,1][[1]])
         b_sex_med <<- c(b_sex_med, fixef(model)[,1][[2]])
         b_cond_med <<- c(b_cond_med, fixef(model)[,1][[3]])
