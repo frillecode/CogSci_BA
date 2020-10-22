@@ -164,7 +164,7 @@ save_results_meta <- function() {
      true_base, b_base_lower, b_base_med, b_base_upper,
      true_sex, b_sex_p_value, b_sex_lower, b_sex_med, b_sex_upper,
      true_cond, b_cond_p_value, b_cond_lower, b_cond_med, b_cond_upper, 
-     true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper, var_pop, pub_true, pp_n
+     true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper, var_pop, pub_true, pp_n,
      pos = ".GlobalEnv")
   
   for (rep in 1:n_repeats) {
