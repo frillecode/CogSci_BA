@@ -21,7 +21,7 @@ do_analyses_1 <- function() {
       
       # adding a meassure for number of posteriors included 
       if(i==1){
-        pp_n <<- c(0)
+        pp_n <<- c(pp_n, 0)
       } else {
         pp_n <<- c(pp_n, 1)
       }
@@ -102,7 +102,7 @@ do_analyses_1 <- function() {
           
           # adding a meassure for number of posteriors included 
           if(pp_u == 0 & pp_sig == 0.1){
-            pp_n <<- c(0)
+            pp_n <<- c(pp_n, 0)
           } else {
             pp_n <<- c(pp_n, 1)
           }
