@@ -1,6 +1,6 @@
 # imports
 library(pacman)
-pacman::p_load(brms, dplyr, boot)
+pacman::p_load(brms, dplyr, boot, igraph)
 source("util1.r")
 source("simulation.R")
 source("analysis1.r")
@@ -39,7 +39,8 @@ var_sig <- 0.2 #sd
 # be passed. The size of this citation_chain can be specified
 # in size parameters below (number of nodes specified in 
 # n_experiments_per_repeat below). 
-citation_list <- read_csv("my_edgelist.csv")
+citation_list <- read_csv("my_edgelist.csv") 
+citation_list <- graph_from_data_frame(d=citation_list, directed=T)
 
 ### Size parameters
 # These determine the size of the simulations for every set of
@@ -47,18 +48,18 @@ citation_list <- read_csv("my_edgelist.csv")
 # Warning! n_participants_per_experiment and n_people need to 
 # be divisible by 4!
 n_repeats <- 1
-n_experiments_per_repeat <- 60
+n_experiments_per_repeat <- 4
 n_participants_per_experiment <- 80
 n_trials_per_participant <- 25
 n_people <- 100000
 
-total_simulations <- length(b_bases) * length(b_sexs) * length(b_conds) * length(b_sex_conds) * length(var_bases) * length(var_sexs) * length(var_conds) * length(var_sex_conds) * n_repeats
+total_simulations <- length(b_bases) * length(b_sexs) * length(b_conds) * length(b_sex_conds) * n_repeats
 current_simulation <- 1
 
 ### Analysis parameters
 # These allow you to choose which analyses do you want
+do_pp_linear <- F
 do_pp_citation <- T
-do_pp_linear <- T
 
 ### Publication bias
 # This allows you to choose whether or not the analysis 
@@ -181,9 +182,9 @@ for (i in 1:length(b_bases)) {
 meta_results <- compile_meta_results()
 
 #save results
-saved <- paste("Results/saved_results_", number, ".csv", sep = "")          ###### ??????
-meta_a <- paste("Results/meta_analysis_results_", number, ".csv", sep = "") ###### ??????
-write.csv(saved_results_final, saved)                                       ###### ??????
-write.csv(meta_analysis_final, meta_a)                                      ###### ??????
+# saved <- paste("Results/saved_results_", number, ".csv", sep = "")          ###### ??????
+# meta_a <- paste("Results/meta_analysis_results_", number, ".csv", sep = "") ###### ??????
+# write.csv(saved_results_final, saved)                                       ###### ??????
+# write.csv(meta_analysis_final, meta_a)                                      ###### ??????
 
 #tidy_workspace()

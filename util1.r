@@ -135,6 +135,7 @@ prepare_data_vectors <- function() {
   b_sex_cond_upper <<- vector()
   b_sex_cond_error <<- vector()
   pub_true <<- vector()
+  pp_n <<- vector()
   var_pop <<- vector()  
 }
 

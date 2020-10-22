@@ -21,9 +21,9 @@ do_analyses_1 <- function() {
       
       # adding a meassure for number of posteriors included 
       if(i==1){
-        pp_n <- c(0)
+        pp_n <<- c(0)
       } else {
-        pp_n <- c(pp_n, 1)
+        pp_n <<- c(pp_n, 1)
       }
       
       #update prior in prior_string
@@ -102,9 +102,9 @@ do_analyses_1 <- function() {
           
           # adding a meassure for number of posteriors included 
           if(pp_u == 0 & pp_sig == 0.1){
-            pp_n <- c(0)
+            pp_n <<- c(0)
           } else {
-            pp_n <- c(pp_n, 1)
+            pp_n <<- c(pp_n, 1)
           }
           
           #update prior in prior_string
@@ -191,14 +191,14 @@ do_analyses_1 <- function() {
       save_analysis_results_1("pp_citation")
       
       # empty df to save data in each iteration
-      chain_df <- as.data.frame(matrix(0,nrow = 1, ncol = 3))  
+      chain_df <- as.data.frame(matrix(0,nrow = 0, ncol = 3))  
       colnames(chain_df) <-  c("pp_u", "pp_sig", "studyID")
-      pp_n <- c() # adding a meassure for number of posteriors included
       
       # loop
       for (experiment in 1:n_experiments_per_repeat) {
         # for every experiment get the relevant data set
         this_data_set <- data_sets[data_sets$data_set == experiment,]
+        this_data_set$studyID <- as.character(this_data_set$studyID)
         this_chain_df <- as.data.frame(matrix(0,nrow = 1, ncol = 3))  
         colnames(this_chain_df) <- colnames(chain_df)
         
@@ -207,29 +207,37 @@ do_analyses_1 <- function() {
           pp_u <- 0
           pp_sig <- 0.1
           
-          pp_n <- c(pp_n, 0) 
+          pp_n <<- c(pp_n, 0) 
           
         }else{
           this_citation_chain <- citation_chain %>% 
-            filter(citation_chain$to == this_data_set$studyID[1]) %>% 
-            filter(this_citation_chain$from %in% chain_df$study)
+            filter(to == this_data_set$studyID[1]) %>% 
+            filter(from %in% chain_df$study)
           this_citation_chain <- tidy_chain(citation_chain, this_citation_chain)
           
-          if(nrow(this_citation_chain) == 0){
+          if(nrow(this_citation_chain) == 0){ # if no studies are cited
             pp_u <- 0
             pp_sig <- 0.1
             
-            pp_n <- c(pp_n, 0)
+            pp_n <<- c(pp_n, 0)
             
-          }else{
+          }  else{ 
             this_chain_df <- chain_df %>% filter(chain_df$studyID %in% this_citation_chain$from)
             
-            pp <- kalman(mean = chain_df$pp_u, sd = chain_df$pp_sig)
+            if (nrow(this_chain_df)==1){ # if one study is cited
+              pp_u <- this_chain_df$pp_u
+              pp_sig <- this_chain_df$pp_sig
+              
+              pp_n <<- c(pp_n, length(chain_df$pp_u))
+            } else{
+              pp <- kalman(mean = this_chain_df$pp_u, sd = this_chain_df$pp_sig)
+              
+              pp_u <- pp[,1]
+              pp_sig <- pp[,2]
+              
+              pp_n <<- c(pp_n, length(this_citation_chain_df$pp_u))
+            }
             
-            pp_u <- pp[,1]
-            pp_sig <- pp[,2]
-            
-            pp_n <- c(pp_n, length(chain_df$pp_u))
           }
         }
         
@@ -307,45 +315,52 @@ do_analyses_1 <- function() {
       save_analysis_results_1("pp_citation_pb")
       
       # empty df to save data in each iteration
-      chain_df <- as.data.frame(matrix(0,nrow = 1, ncol = 3))  
+      chain_df <- as.data.frame(matrix(0,nrow = 0, ncol = 3))  
       colnames(chain_df) <-  c("pp_u", "pp_sig", "studyID")
       
       # loop
       for (experiment in 1:n_experiments_per_repeat) {
         # for every experiment get the relevant data set
         this_data_set <- data_sets[data_sets$data_set == experiment,]
+        this_data_set$studyID <- as.character(this_data_set$studyID)
         this_chain_df <- as.data.frame(matrix(0,nrow = 1, ncol = 3))  
         colnames(this_chain_df) <- colnames(chain_df)
-        pp_n <- c() # adding a meassure for number of posteriors included
         
         # set initial prior for beta[4] and update afterwards (if not first round, update pp_u and pp_sig)
         if(nrow(chain_df) == 0){
           pp_u <- 0
           pp_sig <- 0.1
           
-          pp_n <- c(pp_n, 0)
+          pp_n <<- c(pp_n, 0) # adding a meassure for number of posteriors included
           
         }else{
           this_citation_chain <- citation_chain %>% 
-            filter(citation_chain$to == this_data_set$studyID[1]) %>% 
-            filter(this_citation_chain$from %in% chain_df$study)
+            filter(to == this_data_set$studyID[1]) %>% 
+            filter(from %in% chain_df$study)
           this_citation_chain <- tidy_chain(citation_chain, this_citation_chain)
           
           if(nrow(this_citation_chain) == 0){
             pp_u <- 0
             pp_sig <- 0.1
             
-            pp_n <- c(pp_n, 0)
+            pp_n <<- c(pp_n, 0)
             
           }else{
             this_chain_df <- chain_df %>% filter(chain_df$studyID %in% this_citation_chain$from)
             
-            pp <- kalman(mean = chain_df$pp_u, sd = chain_df$pp_sig)
-            
-            pp_u <- pp[,1]
-            pp_sig <- pp[,2]
-            
-            pp_n <- c(pp_n, length(chain_df$pp_u))
+            if (nrow(this_chain_df)==1){ # if one study is cited
+              pp_u <- this_chain_df$pp_u
+              pp_sig <- this_chain_df$pp_sig
+              
+              pp_n <<- c(pp_n, length(chain_df$pp_u))
+            } else{
+              pp <- kalman(mean = this_chain_df$pp_u, sd = this_chain_df$pp_sig)
+              
+              pp_u <- pp[,1]
+              pp_sig <- pp[,2]
+              
+              pp_n <<- c(pp_n, length(this_citation_chain_df$pp_u))
+            }
           }
         }
         
