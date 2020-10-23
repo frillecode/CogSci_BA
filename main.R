@@ -58,7 +58,7 @@ current_simulation <- 1
 
 ### Analysis parameters
 # These allow you to choose which analyses do you want
-do_pp_linear <- F
+do_pp_linear <- T
 do_pp_citation <- T
 
 ### Publication bias
@@ -69,7 +69,7 @@ do_pp_citation <- T
 # of effect and whether or not CIs include 0. This also allows
 # you do decide whether you want the publication bias to be 
 # symmetric or asymmetric. 
-do_publication_bias <- F
+do_publication_bias <- T
 
 pb_prob_pos <- 0.9 #prob if b above zero and b lower above zero
 pb_prob_null <- 0.2 #prob if b above zero and b lower below zero OR b below zero and b upper above zero
