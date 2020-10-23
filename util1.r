@@ -9,6 +9,11 @@ prepare_meta_vectors <- function() {
   meta_true_sex <<- vector()
   meta_true_cond <<- vector()
   meta_true_sex_cond <<- vector()
+  pub_pp_l <<- vector()
+  pub_pp_l_pb <<- vector()
+  pub_pp_c <<- vector()
+  pub_pp_c_pb <<- vector()
+  meta_var_pop <<- vector()
   
   meta_base_estimate_pp_l <<- vector()
   meta_sex_estimate_pp_l <<- vector()
@@ -160,6 +165,7 @@ save_results_meta <- function() {
                         true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper, b_sex_cond_error, 
                         pub_true, pp_n, var_pop) 
   saved_results <<- results
+  
   rm(this_data_set, model,
      repeat_id, expt, analysis_type,
      true_base, b_base_lower, b_base_med, b_base_upper,
@@ -173,6 +179,14 @@ save_results_meta <- function() {
     pp_l_pb_results <- results[results$repeat_id == rep & results$analysis_type == "pp_linear_pb",]
     pp_c_results <- results[results$repeat_id == rep & results$analysis_type == "pp_citation",]
     pp_c_pb_results <- results[results$repeat_id == rep & results$analysis_type == "pp_citation_pb",]
+    
+    #pub_true and var_pop
+    pub_pp_l <<- c(pub_pp_l, sum(pp_l_results$pub_true))
+    pub_pp_l_pb <<- c(pub_pp_l_pb, sum(pp_l_pb_results$pub_true))
+    pub_pp_c <<- c(pub_pp_c, sum(pp_c_results$pub_true))
+    pub_pp_c_pb <<- c(pub_pp_c_pb, sum(pp_c_pb_results$pub_true))
+    
+    meta_var_pop <<- c(meta_var_pop, pp_l_results$var_pop[1])
     
     # estimate
     if (pp_final_expt_only == FALSE) {
@@ -418,7 +432,8 @@ compile_meta_results <- function() {
   
   return(data.frame(meta_n_repeats,meta_n_experiments_per_repeat, meta_n_participants_per_experiment,
                     meta_n_trials_per_participant, meta_n_people,
-                    meta_true_base, meta_true_sex, meta_true_cond, meta_true_sex_cond, 
+                    meta_true_base, meta_true_sex, meta_true_cond, meta_true_sex_cond,
+                    pub_pp_l, pub_pp_l_pb, pub_pp_c, pub_pp_c_pb, meta_var_pop,
                     meta_base_estimate_pp_l, meta_sex_estimate_pp_l, meta_cond_estimate_pp_l, meta_sex_cond_estimate_pp_l,
                     meta_base_estimate_pp_l_pb, meta_sex_estimate_pp_l_pb, meta_cond_estimate_pp_l_pb, meta_sex_cond_estimate_pp_l_pb,
                     meta_base_estimate_pp_c, meta_sex_estimate_pp_c, meta_cond_estimate_pp_c, meta_sex_cond_estimate_pp_c,
@@ -449,6 +464,7 @@ tidy_workspace <- function() {
   rm(meta_n_repeats,meta_n_experiments_per_repeat, meta_n_participants_per_experiment,
      meta_n_trials_per_participant, meta_n_people,
      meta_true_base, meta_true_sex, meta_true_cond, meta_true_sex_cond, 
+     pub_pp_l, pub_pp_l_pb, pub_pp_c, pub_pp_c_pb, meta_var_pop,
      meta_base_estimate_pp_l, meta_sex_estimate_pp_l, meta_cond_estimate_pp_l, meta_sex_cond_estimate_pp_l,
      meta_base_estimate_pp_l_pb, meta_sex_estimate_pp_l_pb, meta_cond_estimate_pp_l_pb, meta_sex_cond_estimate_pp_l_pb,
      meta_base_estimate_pp_c, meta_sex_estimate_pp_c, meta_cond_estimate_pp_c, meta_sex_cond_estimate_pp_c,
