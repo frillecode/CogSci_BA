@@ -3,7 +3,7 @@ create_population <- function() {
   
   id <- c(1:n_people)
   sex <- c(rep(0, n_people/2), rep(1, n_people/2))
-  var_base <- abs(rnorm(1, var_u, var_sig))
+  var_base <- rgamma(n=1, shape=var_shape, scale=var_scale)
   d_base <- rnorm(n_people/4, 0.0, var_base) 
   d_base <- c(d_base, 0-d_base, d_base, 0-d_base)
   return(data.frame(id, sex, d_base, var_base))

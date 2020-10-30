@@ -1,6 +1,6 @@
 # imports
 library(pacman)
-pacman::p_load(brms, dplyr, boot, igraph)
+pacman::p_load(brms, dplyr, boot, igraph, tidyverse)
 source("util1.r")
 source("simulation.R")
 source("analysis1.r")
@@ -8,7 +8,7 @@ source("analysis1.r")
 ###       ###
 ### SETUP ###
 ###       ###
-number <- 101
+number <- "test"
 
 ###            ###
 ### Parameters ###
@@ -19,8 +19,8 @@ number <- 101
 # putting multiple values in will cause simulations to run
 # with different true values.
 # The first four give the mean value of the four parameters
-# that determine participant behavior. The next two allow you
-# to determine the mean and sd of the normal distribution that
+# that determine participant behaviour. The next two allow you
+# to determine the shape and scale of the gamma distribution that
 # that the individual variance of the simulated population 
 # will be randomly drawn from for each repeat. 
 b_bases <- c(0)
@@ -28,8 +28,8 @@ b_sexs <- c(0)
 b_conds <- c(0)
 b_sex_conds <- c(1) #0, 1, 2
 
-var_u <- 0.5 #mean
-var_sig <- 0.2 #sd
+var_shape <- 5 
+var_scale <- 0.1 
 
 ### Citation chain
 # Here you can insert an edgelist. Based on the degree 
@@ -78,7 +78,7 @@ pb_prob_neg <- 0.6 #prob if b below zero and b upper below zero
 ### Posterior-passing parameters
 # These give you various options wrt posterior passing
 # log only the final experiment from each chain:
-pp_final_expt_only <- T
+pp_final_expt_only <- F
 
 ### Vectors to store meta-data
 # This function is in util.R It creates a number of vectors that will be
@@ -182,9 +182,7 @@ for (i in 1:length(b_bases)) {
 meta_results <- compile_meta_results()
 
 #save results
-# saved <- paste("Results/saved_results_", number, ".csv", sep = "")          ###### ??????
-# meta_a <- paste("Results/meta_analysis_results_", number, ".csv", sep = "") ###### ??????
-# write.csv(saved_results_final, saved)                                       ###### ??????
-# write.csv(meta_analysis_final, meta_a)                                      ###### ??????
+saved <- paste("Results/saved_results_", number, ".csv", sep = "")         
+write.csv(saved_results_final, saved)                                       
 
 #tidy_workspace()
