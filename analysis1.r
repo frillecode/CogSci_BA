@@ -20,7 +20,7 @@ do_analyses_1 <- function() {
       this_data_set <- data_sets[data_sets$data_set == experiment,]
       
       # adding a meassure for number of posteriors included 
-      if(i==1){
+      if(experiment==1){
         pp_n <<- c(pp_n, 0)
       } else {
         pp_n <<- c(pp_n, 1)

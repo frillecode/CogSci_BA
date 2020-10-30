@@ -26,7 +26,7 @@ number <- "test"
 b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
-b_sex_conds <- c(1) #0, 1, 2
+b_sex_conds <- c(1,2) #0, 1, 2
 
 var_shape <- 5 
 var_scale <- 0.1 
@@ -47,7 +47,7 @@ citation_list <- graph_from_data_frame(d=citation_list, directed=T)
 # parameter values given in the "True values" section above.
 # Warning! n_participants_per_experiment and n_people need to 
 # be divisible by 4!
-n_repeats <- 1
+n_repeats <- 2
 n_experiments_per_repeat <- 4
 n_participants_per_experiment <- 80
 n_trials_per_participant <- 25
