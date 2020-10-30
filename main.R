@@ -26,7 +26,7 @@ number <- 101
 b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
-b_sex_conds <- c(1) #0, 1, 2
+b_sex_conds <- c(1,2) #0, 1, 2
 
 var_u <- 0.5 #mean
 var_sig <- 0.2 #sd
