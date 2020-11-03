@@ -3,7 +3,7 @@ library(pacman)
 pacman::p_load(brms, dplyr, boot, igraph, tidyverse)
 source("util1.r")
 source("simulation.R")
-source("analysis1.r")
+source("analysis1_var.r")
 
 ###       ###
 ### SETUP ###
@@ -26,7 +26,7 @@ number <- "test"
 b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
-b_sex_conds <- c(1,2) #0, 1, 2
+b_sex_conds <- c((-2),0,2) #0, 1, 2
 
 var_shape <- 5 
 var_scale <- 0.1 
@@ -182,7 +182,7 @@ for (i in 1:length(b_bases)) {
 meta_results <- compile_meta_results()
 
 #save results
-saved <- paste("Results/saved_results_", number, ".csv", sep = "")         
-write.csv(saved_results_final, saved)                                       
+# saved <- paste("Results/saved_results_", number, ".csv", sep = "")         
+# write.csv(saved_results_final, saved)                                       
 
 #tidy_workspace()
