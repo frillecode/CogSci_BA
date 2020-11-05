@@ -26,7 +26,7 @@ number <- "test"
 b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
-b_sex_conds <- c((-2)) #0, 1, 2
+b_sex_conds <- c(2) #0, 1, 2
 
 var_shape <- 5 
 var_scale <- 0.1 
