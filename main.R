@@ -26,7 +26,7 @@ number <- "test"
 b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
-b_sex_conds <- c((-2),0,2) #0, 1, 2
+b_sex_conds <- c((-2)) #0, 1, 2
 
 var_shape <- 5 
 var_scale <- 0.1 
@@ -183,6 +183,7 @@ meta_results <- compile_meta_results()
 
 #save results
 # saved <- paste("Results/saved_results_", number, ".csv", sep = "")         
-# write.csv(saved_results_final, saved)                                       
+# write.csv(saved_results_final, "Results/saved_results_test.csv")
+# write.csv(meta_results, "Results/meta_results_test.csv")
 
 #tidy_workspace()

@@ -228,14 +228,14 @@ do_analyses_1 <- function() {
               pp_u <- this_chain_df$pp_u
               pp_sig <- this_chain_df$pp_sig
               
-              pp_n <<- c(pp_n, length(chain_df$pp_u))
+              pp_n <<- c(pp_n, nrow(chain_df$pp_u))
             } else{
               pp <- kalman(mean = this_chain_df$pp_u, sd = this_chain_df$pp_sig)
               
               pp_u <- pp[,1]
               pp_sig <- pp[,2]
               
-              pp_n <<- c(pp_n, length(this_chain_df$pp_u))
+              pp_n <<- c(pp_n, nrow(this_chain_df$pp_u))
             }
             
           }
@@ -352,14 +352,14 @@ do_analyses_1 <- function() {
               pp_u <- this_chain_df$pp_u
               pp_sig <- this_chain_df$pp_sig
               
-              pp_n <<- c(pp_n, length(chain_df$pp_u))
+              pp_n <<- c(pp_n, nrow(chain_df$pp_u))
             } else{
               pp <- kalman(mean = this_chain_df$pp_u, sd = this_chain_df$pp_sig)
               
               pp_u <- pp[,1]
               pp_sig <- pp[,2]
               
-              pp_n <<- c(pp_n, length(this_citation_chain_df$pp_u))
+              pp_n <<- c(pp_n, nrow(this_citation_chain_df$pp_u))
             }
           }
         }
