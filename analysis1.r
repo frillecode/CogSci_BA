@@ -212,8 +212,11 @@ do_analyses_1 <- function() {
         }else{
           this_citation_chain <- citation_chain %>% 
             filter(to == this_data_set$studyID[1]) %>% 
-            filter(from %in% chain_df$study)
-          this_citation_chain <- tidy_chain(citation_chain, this_citation_chain)
+            filter(from %in% chain_df$studyID)
+          
+          if(!(nrow(this_citation_chain) == 0)){
+            this_citation_chain <- tidy_chain(citation_chain, this_citation_chain) 
+          }
           
           if(nrow(this_citation_chain) == 0){ # if no studies are cited
             pp_u <- 0
@@ -336,8 +339,11 @@ do_analyses_1 <- function() {
         }else{
           this_citation_chain <- citation_chain %>% 
             filter(to == this_data_set$studyID[1]) %>% 
-            filter(from %in% chain_df$study)
-          this_citation_chain <- tidy_chain(citation_chain, this_citation_chain)
+            filter(from %in% chain_df$studyID)
+          
+          if(!(nrow(this_citation_chain) == 0)){
+            this_citation_chain <- tidy_chain(citation_chain, this_citation_chain) 
+          }
           
           if(nrow(this_citation_chain) == 0){
             pp_u <- 0
