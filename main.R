@@ -3,7 +3,7 @@ library(pacman)
 pacman::p_load(brms, dplyr, boot, igraph, tidyverse)
 source("util1.r")
 source("simulation.R")
-source("analysis1_var.r")
+source("analysis1.r")
 
 ###       ###
 ### SETUP ###
@@ -26,7 +26,7 @@ number <- "test"
 b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
-b_sex_conds <- c((-1)) #0, 1, 2
+b_sex_conds <- c(0,2) #0, 1, 2
 
 var_shape <- 5 
 var_scale <- 0.1 
@@ -169,7 +169,8 @@ for (i in 1:length(b_bases)) {
               ### Save results for each value of b_sex_conds
               ###
               if(exists("saved_results_final")){
-                saved_results_final <- merge(saved_results, saved_results_final)
+                saved_results_final <- rbind(saved_results, saved_results_final)
+                print("YES")
               } else {
                 saved_results_final <- saved_results
               }
