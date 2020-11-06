@@ -359,7 +359,7 @@ do_analyses_1 <- function() {
               pp_u <- pp[,1]
               pp_sig <- pp[,2]
               
-              pp_n <<- c(pp_n, nrow(this_citation_chain_df$pp_u))
+              pp_n <<- c(pp_n, nrow(this__chain_df$pp_u))
             }
           }
         }
