@@ -1,5 +1,5 @@
 prepare_meta_vectors <- function() {
-  total_meta_conditions <<- length(b_bases)*length(b_sexs)*length(b_conds)*length(b_sex_conds)
+  total_meta_conditions <<- length(b_bases)*length(b_sexs)*length(b_conds)*length(b_sex_conds)*n_repeats
   meta_n_repeats <<- rep(n_repeats, total_meta_conditions)
   meta_n_experiments_per_repeat <<- rep(n_experiments_per_repeat, total_meta_conditions)
   meta_n_participants_per_experiment <<- rep(n_participants_per_experiment, total_meta_conditions)
@@ -163,7 +163,7 @@ save_results_meta <- function() {
                         true_sex, b_sex_p_value, b_sex_lower, b_sex_med, b_sex_upper, b_sex_error,
                         true_cond, b_cond_p_value, b_cond_lower, b_cond_med, b_cond_upper, b_cond_error,
                         true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper, b_sex_cond_error, 
-                        pub_true, #pp_n, 
+                        pub_true, pp_n, 
                         var_pop
                         ) 
   saved_results <<- results
