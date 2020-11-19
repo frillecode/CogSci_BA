@@ -26,7 +26,7 @@ number <- "test"
 b_bases <- c(0)
 b_sexs <- c(0)
 b_conds <- c(0)
-b_sex_conds <- c(0,2) #0, 1, 2
+b_sex_conds <- c((-2),(-1),0,1,2) #0, 1, 2
 
 var_shape <- 5 
 var_scale <- 0.1 
@@ -47,8 +47,8 @@ citation_list <- graph_from_data_frame(d=citation_list, directed=T)
 # parameter values given in the "True values" section above.
 # Warning! n_participants_per_experiment and n_people need to 
 # be divisible by 4!
-n_repeats <- 2
-n_experiments_per_repeat <- 4
+n_repeats <- 4
+n_experiments_per_repeat <- 60
 n_participants_per_experiment <- 80
 n_trials_per_participant <- 25
 n_people <- 100000
@@ -78,7 +78,7 @@ pb_prob_neg <- 0.6 #prob if b below zero and b upper below zero
 ### Posterior-passing parameters
 # These give you various options wrt posterior passing
 # log only the final experiment from each chain:
-pp_final_expt_only <- F
+pp_final_expt_only <- T
 
 ### Vectors to store meta-data
 # This function is in util.R It creates a number of vectors that will be
@@ -155,6 +155,20 @@ for (i in 1:length(b_bases)) {
                 # in this table corresponds to a single analysis on a single data_set.
                 do_analyses_1()
                 
+                ###
+                ### Remove DLLs #
+                ###
+                # Code from https://github.com/stan-dev/rstan/issues/448
+                loaded_dlls = getLoadedDLLs()
+                loaded_dlls = loaded_dlls[str_detect(names(loaded_dlls), '^file')]
+                if (length(loaded_dlls) > 10) {
+                  for (dll in head(loaded_dlls, -10)) {
+                    message("Unloading DLL ", dll[['name']], ": ", dll[['path']])
+                    dyn.unload(dll[['path']])
+                  }
+                }
+                message("DLL Count = ", length(getLoadedDLLs()), ": [", str_c(names(loaded_dlls), collapse = ","), "]")
+                
               } # end of for each repeat loop
               
               ###
@@ -184,7 +198,7 @@ meta_results <- compile_meta_results()
 
 #save results
 # saved <- paste("Results/saved_results_", number, ".csv", sep = "")         
-# write.csv(saved_results_final, "Results/saved_results_test.csv")
-# write.csv(meta_results, "Results/meta_results_test.csv")
+# write.csv(saved_results_final, "Results/saved_results_asym.csv")
+# write.csv(meta_results, "Results/meta_results_asym.csv")
 
-#tidy_workspace()
+tidy_workspace()

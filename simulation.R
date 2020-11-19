@@ -66,7 +66,7 @@ create_citation_chain <- function(list){
 }
 
 create_citation_chain <- function(list){
-  dd <- degree_distribution(list)
+  dd <- degree_distribution(citation_list)
   chain <- barabasi.game(n_experiments_per_repeat, out.dist = dd) 
   chain <- igraph::as_data_frame(chain)
   chain <- data.frame(
