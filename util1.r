@@ -10,9 +10,11 @@ prepare_meta_vectors <- function() {
   meta_true_cond <<- vector()
   meta_true_sex_cond <<- vector()
   pub_pp_l <<- vector()
-  pub_pp_l_pb <<- vector()
+  pub_pp_l_pb_sym <<- vector()
+  pub_pp_l_pb_asym <<- vector()
   pub_pp_c <<- vector()
-  pub_pp_c_pb <<- vector()
+  pub_pp_c_pb_sym <<- vector()
+  pub_pp_c_pb_asym <<- vector()
   meta_var_pop <<- vector()
   
   meta_base_estimate_pp_l <<- vector()
@@ -20,96 +22,120 @@ prepare_meta_vectors <- function() {
   meta_cond_estimate_pp_l <<- vector()
   meta_sex_cond_estimate_pp_l <<- vector()
   
-  meta_base_estimate_pp_l_pb <<- vector()
-  meta_sex_estimate_pp_l_pb <<- vector()
-  meta_cond_estimate_pp_l_pb <<- vector()
-  meta_sex_cond_estimate_pp_l_pb <<- vector()
+  meta_base_estimate_pp_l_pb_sym <<- vector()
+  meta_sex_estimate_pp_l_pb_sym <<- vector()
+  meta_cond_estimate_pp_l_pb_sym <<- vector()
+  meta_sex_cond_estimate_pp_l_pb_sym <<- vector()
+  
+  meta_base_estimate_pp_l_pb_asym <<- vector()
+  meta_sex_estimate_pp_l_pb_asym <<- vector()
+  meta_cond_estimate_pp_l_pb_asym <<- vector()
+  meta_sex_cond_estimate_pp_l_pb_asym <<- vector()
   
   meta_base_estimate_pp_c <<- vector()
   meta_sex_estimate_pp_c <<- vector()
   meta_cond_estimate_pp_c <<- vector()
   meta_sex_cond_estimate_pp_c <<- vector()
   
-  meta_base_estimate_pp_c_pb <<- vector()
-  meta_sex_estimate_pp_c_pb <<- vector()
-  meta_cond_estimate_pp_c_pb <<- vector()
-  meta_sex_cond_estimate_pp_c_pb <<- vector()
+  meta_base_estimate_pp_c_pb_sym <<- vector()
+  meta_sex_estimate_pp_c_pb_sym <<- vector()
+  meta_cond_estimate_pp_c_pb_sym <<- vector()
+  meta_sex_cond_estimate_pp_c_pb_sym <<- vector()
+  
+  meta_base_estimate_pp_c_pb_asym <<- vector()
+  meta_sex_estimate_pp_c_pb_asym <<- vector()
+  meta_cond_estimate_pp_c_pb_asym <<- vector()
+  meta_sex_cond_estimate_pp_c_pb_asym <<- vector()
   
   meta_base_estimate_upper_pp_l <<- vector()
   meta_sex_estimate_upper_pp_l <<- vector()
   meta_cond_estimate_upper_pp_l <<- vector()
   meta_sex_cond_estimate_upper_pp_l <<- vector()
   
-  meta_base_estimate_upper_pp_l_pb <<- vector()
-  meta_sex_estimate_upper_pp_l_pb <<- vector()
-  meta_cond_estimate_upper_pp_l_pb <<- vector()
-  meta_sex_cond_estimate_upper_pp_l_pb <<- vector()
+  meta_base_estimate_upper_pp_l_pb_sym <<- vector()
+  meta_sex_estimate_upper_pp_l_pb_sym <<- vector()
+  meta_cond_estimate_upper_pp_l_pb_sym <<- vector()
+  meta_sex_cond_estimate_upper_pp_l_pb_sym <<- vector()
+  
+  meta_base_estimate_upper_pp_l_pb_asym <<- vector()
+  meta_sex_estimate_upper_pp_l_pb_asym <<- vector()
+  meta_cond_estimate_upper_pp_l_pb_asym <<- vector()
+  meta_sex_cond_estimate_upper_pp_l_pb_asym <<- vector()
   
   meta_base_estimate_upper_pp_c <<- vector()
   meta_sex_estimate_upper_pp_c <<- vector()
   meta_cond_estimate_upper_pp_c <<- vector()
   meta_sex_cond_estimate_upper_pp_c <<- vector()
   
-  meta_base_estimate_upper_pp_c_pb <<- vector()
-  meta_sex_estimate_upper_pp_c_pb <<- vector()
-  meta_cond_estimate_upper_pp_c_pb <<- vector()
-  meta_sex_cond_estimate_upper_pp_c_pb <<- vector()
+  meta_base_estimate_upper_pp_c_pb_sym <<- vector()
+  meta_sex_estimate_upper_pp_c_pb_sym <<- vector()
+  meta_cond_estimate_upper_pp_c_pb_sym <<- vector()
+  meta_sex_cond_estimate_upper_pp_c_pb_sym <<- vector()
+  
+  meta_base_estimate_upper_pp_c_pb_asym <<- vector()
+  meta_sex_estimate_upper_pp_c_pb_asym <<- vector()
+  meta_cond_estimate_upper_pp_c_pb_asym <<- vector()
+  meta_sex_cond_estimate_upper_pp_c_pb_asym <<- vector()
 
   meta_base_estimate_lower_pp_l <<- vector()
   meta_sex_estimate_lower_pp_l <<- vector()
   meta_cond_estimate_lower_pp_l <<- vector()
   meta_sex_cond_estimate_lower_pp_l <<- vector()
   
-  meta_base_estimate_lower_pp_l_pb <<- vector()
-  meta_sex_estimate_lower_pp_l_pb <<- vector()
-  meta_cond_estimate_lower_pp_l_pb <<- vector()
-  meta_sex_cond_estimate_lower_pp_l_pb <<- vector()
+  meta_base_estimate_lower_pp_l_pb_sym <<- vector()
+  meta_sex_estimate_lower_pp_l_pb_sym <<- vector()
+  meta_cond_estimate_lower_pp_l_pb_sym <<- vector()
+  meta_sex_cond_estimate_lower_pp_l_pb_sym <<- vector()
+  
+  meta_base_estimate_lower_pp_l_pb_asym <<- vector()
+  meta_sex_estimate_lower_pp_l_pb_asym <<- vector()
+  meta_cond_estimate_lower_pp_l_pb_asym <<- vector()
+  meta_sex_cond_estimate_lower_pp_l_pb_asym <<- vector()
   
   meta_base_estimate_lower_pp_c <<- vector()
   meta_sex_estimate_lower_pp_c <<- vector()
   meta_cond_estimate_lower_pp_c <<- vector()
   meta_sex_cond_estimate_lower_pp_c <<- vector()
   
-  meta_base_estimate_lower_pp_c_pb <<- vector()
-  meta_sex_estimate_lower_pp_c_pb <<- vector()
-  meta_cond_estimate_lower_pp_c_pb <<- vector()
-  meta_sex_cond_estimate_lower_pp_c_pb <<- vector()
+  meta_base_estimate_lower_pp_c_pb_sym <<- vector()
+  meta_sex_estimate_lower_pp_c_pb_sym <<- vector()
+  meta_cond_estimate_lower_pp_c_pb_sym <<- vector()
+  meta_sex_cond_estimate_lower_pp_c_pb_sym <<- vector()
   
-  meta_sex_positive_rate_pp_l <<- vector()
-  meta_cond_positive_rate_pp_l <<- vector()
-  meta_sex_cond_positive_rate_pp_l <<- vector()
-  
-  meta_sex_positive_rate_pp_l_pb <<- vector()
-  meta_cond_positive_rate_pp_l_pb <<- vector()
-  meta_sex_cond_positive_rate_pp_l_pb <<- vector()
-  
-  meta_sex_positive_rate_pp_c <<- vector()
-  meta_cond_positive_rate_pp_c <<- vector()
-  meta_sex_cond_positive_rate_pp_c <<- vector()
-  
-  meta_sex_positive_rate_pp_c_pb <<- vector()
-  meta_cond_positive_rate_pp_c_pb <<- vector()
-  meta_sex_cond_positive_rate_pp_c_pb <<- vector()
+  meta_base_estimate_lower_pp_c_pb_asym <<- vector()
+  meta_sex_estimate_lower_pp_c_pb_asym <<- vector()
+  meta_cond_estimate_lower_pp_c_pb_asym <<- vector()
+  meta_sex_cond_estimate_lower_pp_c_pb_asym <<- vector()
 
   meta_base_uncertainty_pp_l <<- vector()
   meta_sex_uncertainty_pp_l <<- vector()
   meta_cond_uncertainty_pp_l <<- vector()
   meta_sex_cond_uncertainty_pp_l <<- vector()
   
-  meta_base_uncertainty_pp_l_pb <<- vector()
-  meta_sex_uncertainty_pp_l_pb <<- vector()
-  meta_cond_uncertainty_pp_l_pb <<- vector()
-  meta_sex_cond_uncertainty_pp_l_pb <<- vector()
+  meta_base_uncertainty_pp_l_pb_sym <<- vector()
+  meta_sex_uncertainty_pp_l_pb_sym <<- vector()
+  meta_cond_uncertainty_pp_l_pb_sym <<- vector()
+  meta_sex_cond_uncertainty_pp_l_pb_sym <<- vector()
+  
+  meta_base_uncertainty_pp_l_pb_asym <<- vector()
+  meta_sex_uncertainty_pp_l_pb_asym <<- vector()
+  meta_cond_uncertainty_pp_l_pb_asym <<- vector()
+  meta_sex_cond_uncertainty_pp_l_pb_asym <<- vector()
   
   meta_base_uncertainty_pp_c <<- vector()
   meta_sex_uncertainty_pp_c <<- vector()
   meta_cond_uncertainty_pp_c <<- vector()
   meta_sex_cond_uncertainty_pp_c <<- vector()
   
-  meta_base_uncertainty_pp_c_pb <<- vector()
-  meta_sex_uncertainty_pp_c_pb <<- vector()
-  meta_cond_uncertainty_pp_c_pb <<- vector()
-  meta_sex_cond_uncertainty_pp_c_pb <<- vector()
+  meta_base_uncertainty_pp_c_pb_sym <<- vector()
+  meta_sex_uncertainty_pp_c_pb_sym <<- vector()
+  meta_cond_uncertainty_pp_c_pb_sym <<- vector()
+  meta_sex_cond_uncertainty_pp_c_pb_sym <<- vector()
+  
+  meta_base_uncertainty_pp_c_pb_asym <<- vector()
+  meta_sex_uncertainty_pp_c_pb_asym <<- vector()
+  meta_cond_uncertainty_pp_c_pb_asym <<- vector()
+  meta_sex_cond_uncertainty_pp_c_pb_asym <<- vector()
 }
 
 prepare_data_vectors <- function() {
@@ -140,6 +166,7 @@ prepare_data_vectors <- function() {
   b_sex_cond_upper <<- vector()
   b_sex_cond_error <<- vector()
   pub_true <<- vector()
+  pub_method <<-vector()
   pp_n <<- vector()
   var_pop <<- vector()  
 }
@@ -163,7 +190,7 @@ save_results_meta <- function() {
                         true_sex, b_sex_p_value, b_sex_lower, b_sex_med, b_sex_upper, b_sex_error,
                         true_cond, b_cond_p_value, b_cond_lower, b_cond_med, b_cond_upper, b_cond_error,
                         true_sex_cond, b_sex_cond_p_value, b_sex_cond_lower, b_sex_cond_med, b_sex_cond_upper, b_sex_cond_error, 
-                        pub_true, pp_n, 
+                        pub_true, pub_method, pp_n, 
                         var_pop
                         ) 
   saved_results <<- results
@@ -178,15 +205,19 @@ save_results_meta <- function() {
   
   for (rep in 1:n_repeats) {
     pp_l_results <- results[results$repeat_id == rep & results$analysis_type == "pp_linear",]
-    pp_l_pb_results <- results[results$repeat_id == rep & results$analysis_type == "pp_linear_pb",]
+    pp_l_pb_sym_results <- results[results$repeat_id == rep & results$analysis_type == "pp_linear_pb_sym",]
+    pp_l_pb_asym_results <- results[results$repeat_id == rep & results$analysis_type == "pp_linear_pb_asym",]
     pp_c_results <- results[results$repeat_id == rep & results$analysis_type == "pp_citation",]
-    pp_c_pb_results <- results[results$repeat_id == rep & results$analysis_type == "pp_citation_pb",]
+    pp_c_pb_sym_results <- results[results$repeat_id == rep & results$analysis_type == "pp_citation_pb_sym",]
+    pp_c_pb_asym_results <- results[results$repeat_id == rep & results$analysis_type == "pp_citation_pb_asym",]
     
     #pub_true and var_pop
     pub_pp_l <<- c(pub_pp_l, sum(pp_l_results$pub_true))
-    pub_pp_l_pb <<- c(pub_pp_l_pb, sum(pp_l_pb_results$pub_true))
+    pub_pp_l_pb_sym <<- c(pub_pp_l_pb_sym, sum(pp_l_pb_sym_results$pub_true))
+    pub_pp_l_pb_asym <<- c(pub_pp_l_pb_asym, sum(pp_l_pb_asym_results$pub_true))
     pub_pp_c <<- c(pub_pp_c, sum(pp_c_results$pub_true))
-    pub_pp_c_pb <<- c(pub_pp_c_pb, sum(pp_c_pb_results$pub_true))
+    pub_pp_c_pb_sym <<- c(pub_pp_c_pb_sym, sum(pp_c_pb_sym_results$pub_true))
+    pub_pp_c_pb_asym <<- c(pub_pp_c_pb_asym, sum(pp_c_pb_asym_results$pub_true))
     
     meta_var_pop <<- c(meta_var_pop, pp_l_results$var_pop[1])
     
@@ -204,15 +235,27 @@ save_results_meta <- function() {
     }
     
     if (pp_final_expt_only == FALSE) {
-      meta_base_estimate_pp_l_pb <<- c(meta_base_estimate_pp_l_pb, mean(pp_l_pb_results$b_base_med))
-      meta_sex_estimate_pp_l_pb <<- c(meta_sex_estimate_pp_l_pb, mean(pp_l_pb_results$b_sex_med))
-      meta_cond_estimate_pp_l_pb <<- c(meta_cond_estimate_pp_l_pb, mean(pp_l_pb_results$b_cond_med))
-      meta_sex_cond_estimate_pp_l_pb <<- c(meta_sex_cond_estimate_pp_l_pb, mean(pp_l_pb_results$b_sex_cond_med))
+      meta_base_estimate_pp_l_pb_sym <<- c(meta_base_estimate_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_base_med))
+      meta_sex_estimate_pp_l_pb_sym <<- c(meta_sex_estimate_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_med))
+      meta_cond_estimate_pp_l_pb_sym <<- c(meta_cond_estimate_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_cond_med))
+      meta_sex_cond_estimate_pp_l_pb_sym <<- c(meta_sex_cond_estimate_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_cond_med))
     } else {
-      meta_base_estimate_pp_l_pb <<- c(meta_base_estimate_pp_l_pb, mean(pp_l_pb_results$b_base_med[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_estimate_pp_l_pb <<- c(meta_sex_estimate_pp_l_pb, mean(pp_l_pb_results$b_sex_med[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_cond_estimate_pp_l_pb <<- c(meta_cond_estimate_pp_l_pb, mean(pp_l_pb_results$b_cond_med[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_cond_estimate_pp_l_pb <<- c(meta_sex_cond_estimate_pp_l_pb, mean(pp_l_pb_results$b_sex_cond_med[pp_l_pb_results$expt == n_experiments_per_repeat]))
+      meta_base_estimate_pp_l_pb_sym <<- c(meta_base_estimate_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_base_med[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_pp_l_pb_sym <<- c(meta_sex_estimate_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_med[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_pp_l_pb_sym <<- c(meta_cond_estimate_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_cond_med[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_pp_l_pb_sym <<- c(meta_sex_cond_estimate_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_cond_med[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+    }
+    
+    if (pp_final_expt_only == FALSE) {
+      meta_base_estimate_pp_l_pb_asym <<- c(meta_base_estimate_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_base_med))
+      meta_sex_estimate_pp_l_pb_asym <<- c(meta_sex_estimate_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_med))
+      meta_cond_estimate_pp_l_pb_asym <<- c(meta_cond_estimate_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_cond_med))
+      meta_sex_cond_estimate_pp_l_pb_asym <<- c(meta_sex_cond_estimate_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_cond_med))
+    } else {
+      meta_base_estimate_pp_l_pb_asym <<- c(meta_base_estimate_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_base_med[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_pp_l_pb_asym <<- c(meta_sex_estimate_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_med[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_pp_l_pb_asym <<- c(meta_cond_estimate_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_cond_med[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_pp_l_pb_asym <<- c(meta_sex_cond_estimate_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_cond_med[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
     }
     
     if (pp_final_expt_only == FALSE) {
@@ -228,15 +271,27 @@ save_results_meta <- function() {
     }
     
     if (pp_final_expt_only == FALSE) {
-      meta_base_estimate_pp_c_pb <<- c(meta_base_estimate_pp_c_pb, mean(pp_c_pb_results$b_base_med))
-      meta_sex_estimate_pp_c_pb <<- c(meta_sex_estimate_pp_c_pb, mean(pp_c_pb_results$b_sex_med))
-      meta_cond_estimate_pp_c_pb <<- c(meta_cond_estimate_pp_c_pb, mean(pp_c_pb_results$b_cond_med))
-      meta_sex_cond_estimate_pp_c_pb <<- c(meta_sex_cond_estimate_pp_c_pb, mean(pp_c_pb_results$b_sex_cond_med))
+      meta_base_estimate_pp_c_pb_sym <<- c(meta_base_estimate_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_base_med))
+      meta_sex_estimate_pp_c_pb_sym <<- c(meta_sex_estimate_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_med))
+      meta_cond_estimate_pp_c_pb_sym <<- c(meta_cond_estimate_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_cond_med))
+      meta_sex_cond_estimate_pp_c_pb_sym <<- c(meta_sex_cond_estimate_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_cond_med))
     } else {
-      meta_base_estimate_pp_c_pb <<- c(meta_base_estimate_pp_c_pb, mean(pp_c_pb_results$b_base_med[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_estimate_pp_c_pb <<- c(meta_sex_estimate_pp_c_pb, mean(pp_c_pb_results$b_sex_med[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_cond_estimate_pp_c_pb <<- c(meta_cond_estimate_pp_c_pb, mean(pp_c_pb_results$b_cond_med[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_cond_estimate_pp_c_pb <<- c(meta_sex_cond_estimate_pp_c_pb, mean(pp_c_pb_results$b_sex_cond_med[pp_c_pb_results$expt == n_experiments_per_repeat]))
+      meta_base_estimate_pp_c_pb_sym <<- c(meta_base_estimate_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_base_med[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_pp_c_pb_sym <<- c(meta_sex_estimate_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_med[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_pp_c_pb_sym <<- c(meta_cond_estimate_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_cond_med[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_pp_c_pb_sym <<- c(meta_sex_cond_estimate_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_cond_med[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+    }
+    
+    if (pp_final_expt_only == FALSE) {
+      meta_base_estimate_pp_c_pb_asym <<- c(meta_base_estimate_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_base_med))
+      meta_sex_estimate_pp_c_pb_asym <<- c(meta_sex_estimate_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_med))
+      meta_cond_estimate_pp_c_pb_asym <<- c(meta_cond_estimate_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_cond_med))
+      meta_sex_cond_estimate_pp_c_pb_asym <<- c(meta_sex_cond_estimate_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_cond_med))
+    } else {
+      meta_base_estimate_pp_c_pb_asym <<- c(meta_base_estimate_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_base_med[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_pp_c_pb_asym <<- c(meta_sex_estimate_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_med[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_pp_c_pb_asym <<- c(meta_cond_estimate_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_cond_med[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_pp_c_pb_asym <<- c(meta_sex_cond_estimate_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_cond_med[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
     }
     
     # Upper
@@ -253,15 +308,27 @@ save_results_meta <- function() {
     }
     
     if (pp_final_expt_only == FALSE) {
-      meta_base_estimate_upper_pp_l_pb <<- c(meta_base_estimate_upper_pp_l_pb, mean(pp_l_pb_results$b_base_upper))
-      meta_sex_estimate_upper_pp_l_pb <<- c(meta_sex_estimate_upper_pp_l_pb, mean(pp_l_pb_results$b_sex_upper))
-      meta_cond_estimate_upper_pp_l_pb <<- c(meta_cond_estimate_upper_pp_l_pb, mean(pp_l_pb_results$b_cond_upper))
-      meta_sex_cond_estimate_upper_pp_l_pb <<- c(meta_sex_cond_estimate_upper_pp_l_pb, mean(pp_l_pb_results$b_sex_cond_upper))
+      meta_base_estimate_upper_pp_l_pb_sym <<- c(meta_base_estimate_upper_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_base_upper))
+      meta_sex_estimate_upper_pp_l_pb_sym <<- c(meta_sex_estimate_upper_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_upper))
+      meta_cond_estimate_upper_pp_l_pb_sym <<- c(meta_cond_estimate_upper_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_cond_upper))
+      meta_sex_cond_estimate_upper_pp_l_pb_sym <<- c(meta_sex_cond_estimate_upper_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_cond_upper))
     } else {
-      meta_base_estimate_upper_pp_l_pb <<- c(meta_base_estimate_upper_pp_l_pb, mean(pp_l_pb_results$b_base_upper[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_estimate_upper_pp_l_pb <<- c(meta_sex_estimate_upper_pp_l_pb, mean(pp_l_pb_results$b_sex_upper[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_cond_estimate_upper_pp_l_pb <<- c(meta_cond_estimate_upper_pp_l_pb, mean(pp_l_pb_results$b_cond_upper[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_cond_estimate_upper_pp_l_pb <<- c(meta_sex_cond_estimate_upper_pp_l_pb, mean(pp_l_pb_results$b_sex_cond_upper[pp_l_pb_results$expt == n_experiments_per_repeat]))
+      meta_base_estimate_upper_pp_l_pb_sym <<- c(meta_base_estimate_upper_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_base_upper[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_upper_pp_l_pb_sym <<- c(meta_sex_estimate_upper_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_upper[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_upper_pp_l_pb_sym <<- c(meta_cond_estimate_upper_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_cond_upper[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_upper_pp_l_pb_sym <<- c(meta_sex_cond_estimate_upper_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_cond_upper[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+    }
+    
+    if (pp_final_expt_only == FALSE) {
+      meta_base_estimate_upper_pp_l_pb_asym <<- c(meta_base_estimate_upper_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_base_upper))
+      meta_sex_estimate_upper_pp_l_pb_asym <<- c(meta_sex_estimate_upper_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_upper))
+      meta_cond_estimate_upper_pp_l_pb_asym <<- c(meta_cond_estimate_upper_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_cond_upper))
+      meta_sex_cond_estimate_upper_pp_l_pb_asym <<- c(meta_sex_cond_estimate_upper_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_cond_upper))
+    } else {
+      meta_base_estimate_upper_pp_l_pb_asym <<- c(meta_base_estimate_upper_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_base_upper[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_upper_pp_l_pb_asym <<- c(meta_sex_estimate_upper_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_upper[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_upper_pp_l_pb_asym <<- c(meta_cond_estimate_upper_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_cond_upper[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_upper_pp_l_pb_asym <<- c(meta_sex_cond_estimate_upper_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_cond_upper[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
     }
     
     if (pp_final_expt_only == FALSE) {
@@ -277,15 +344,27 @@ save_results_meta <- function() {
     }
     
     if (pp_final_expt_only == FALSE) {
-      meta_base_estimate_upper_pp_c_pb <<- c(meta_base_estimate_upper_pp_c_pb, mean(pp_c_pb_results$b_base_upper))
-      meta_sex_estimate_upper_pp_c_pb <<- c(meta_sex_estimate_upper_pp_c_pb, mean(pp_c_pb_results$b_sex_upper))
-      meta_cond_estimate_upper_pp_c_pb <<- c(meta_cond_estimate_upper_pp_c_pb, mean(pp_c_pb_results$b_cond_upper))
-      meta_sex_cond_estimate_upper_pp_c_pb <<- c(meta_sex_cond_estimate_upper_pp_c_pb, mean(pp_c_pb_results$b_sex_cond_upper))
+      meta_base_estimate_upper_pp_c_pb_sym <<- c(meta_base_estimate_upper_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_base_upper))
+      meta_sex_estimate_upper_pp_c_pb_sym <<- c(meta_sex_estimate_upper_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_upper))
+      meta_cond_estimate_upper_pp_c_pb_sym <<- c(meta_cond_estimate_upper_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_cond_upper))
+      meta_sex_cond_estimate_upper_pp_c_pb_sym <<- c(meta_sex_cond_estimate_upper_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_cond_upper))
     } else {
-      meta_base_estimate_upper_pp_c_pb <<- c(meta_base_estimate_upper_pp_c_pb, mean(pp_c_pb_results$b_base_upper[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_estimate_upper_pp_c_pb <<- c(meta_sex_estimate_upper_pp_c_pb, mean(pp_c_pb_results$b_sex_upper[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_cond_estimate_upper_pp_c_pb <<- c(meta_cond_estimate_upper_pp_c_pb, mean(pp_c_pb_results$b_cond_upper[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_cond_estimate_upper_pp_c_pb <<- c(meta_sex_cond_estimate_upper_pp_c_pb, mean(pp_c_pb_results$b_sex_cond_upper[pp_c_pb_results$expt == n_experiments_per_repeat]))
+      meta_base_estimate_upper_pp_c_pb_sym <<- c(meta_base_estimate_upper_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_base_upper[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_upper_pp_c_pb_sym <<- c(meta_sex_estimate_upper_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_upper[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_upper_pp_c_pb_sym <<- c(meta_cond_estimate_upper_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_cond_upper[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_upper_pp_c_pb_sym <<- c(meta_sex_cond_estimate_upper_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_cond_upper[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+    }
+    
+    if (pp_final_expt_only == FALSE) {
+      meta_base_estimate_upper_pp_c_pb_asym <<- c(meta_base_estimate_upper_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_base_upper))
+      meta_sex_estimate_upper_pp_c_pb_asym <<- c(meta_sex_estimate_upper_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_upper))
+      meta_cond_estimate_upper_pp_c_pb_asym <<- c(meta_cond_estimate_upper_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_cond_upper))
+      meta_sex_cond_estimate_upper_pp_c_pb_asym <<- c(meta_sex_cond_estimate_upper_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_cond_upper))
+    } else {
+      meta_base_estimate_upper_pp_c_pb_asym <<- c(meta_base_estimate_upper_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_base_upper[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_upper_pp_c_pb_asym <<- c(meta_sex_estimate_upper_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_upper[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_upper_pp_c_pb_asym <<- c(meta_cond_estimate_upper_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_cond_upper[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_upper_pp_c_pb_asym <<- c(meta_sex_cond_estimate_upper_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_cond_upper[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
     }
     
     # Lower
@@ -302,15 +381,27 @@ save_results_meta <- function() {
     }
     
     if (pp_final_expt_only == FALSE) {
-      meta_base_estimate_lower_pp_l_pb <<- c(meta_base_estimate_lower_pp_l_pb, mean(pp_l_pb_results$b_base_lower))
-      meta_sex_estimate_lower_pp_l_pb <<- c(meta_sex_estimate_lower_pp_l_pb, mean(pp_l_pb_results$b_sex_lower))
-      meta_cond_estimate_lower_pp_l_pb <<- c(meta_cond_estimate_lower_pp_l_pb, mean(pp_l_pb_results$b_cond_lower))
-      meta_sex_cond_estimate_lower_pp_l_pb <<- c(meta_sex_cond_estimate_lower_pp_l_pb, mean(pp_l_pb_results$b_sex_cond_lower))
+      meta_base_estimate_lower_pp_l_pb_sym <<- c(meta_base_estimate_lower_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_base_lower))
+      meta_sex_estimate_lower_pp_l_pb_sym <<- c(meta_sex_estimate_lower_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_lower))
+      meta_cond_estimate_lower_pp_l_pb_sym <<- c(meta_cond_estimate_lower_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_cond_lower))
+      meta_sex_cond_estimate_lower_pp_l_pb_sym <<- c(meta_sex_cond_estimate_lower_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_cond_lower))
     } else {
-      meta_base_estimate_lower_pp_l_pb <<- c(meta_base_estimate_lower_pp_l_pb, mean(pp_l_pb_results$b_base_lower[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_estimate_lower_pp_l_pb <<- c(meta_sex_estimate_lower_pp_l_pb, mean(pp_l_pb_results$b_sex_lower[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_cond_estimate_lower_pp_l_pb <<- c(meta_cond_estimate_lower_pp_l_pb, mean(pp_l_pb_results$b_cond_lower[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_cond_estimate_lower_pp_l_pb <<- c(meta_sex_cond_estimate_lower_pp_l_pb, mean(pp_l_pb_results$b_sex_cond_lower[pp_l_pb_results$expt == n_experiments_per_repeat]))
+      meta_base_estimate_lower_pp_l_pb_sym <<- c(meta_base_estimate_lower_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_base_lower[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_lower_pp_l_pb_sym <<- c(meta_sex_estimate_lower_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_lower[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_lower_pp_l_pb_sym <<- c(meta_cond_estimate_lower_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_cond_lower[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_lower_pp_l_pb_sym <<- c(meta_sex_cond_estimate_lower_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_cond_lower[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+    }
+    
+    if (pp_final_expt_only == FALSE) {
+      meta_base_estimate_lower_pp_l_pb_asym <<- c(meta_base_estimate_lower_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_base_lower))
+      meta_sex_estimate_lower_pp_l_pb_asym <<- c(meta_sex_estimate_lower_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_lower))
+      meta_cond_estimate_lower_pp_l_pb_asym <<- c(meta_cond_estimate_lower_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_cond_lower))
+      meta_sex_cond_estimate_lower_pp_l_pb_asym <<- c(meta_sex_cond_estimate_lower_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_cond_lower))
+    } else {
+      meta_base_estimate_lower_pp_l_pb_asym <<- c(meta_base_estimate_lower_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_base_lower[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_lower_pp_l_pb_asym <<- c(meta_sex_estimate_lower_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_lower[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_lower_pp_l_pb_asym <<- c(meta_cond_estimate_lower_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_cond_lower[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_lower_pp_l_pb_asym <<- c(meta_sex_cond_estimate_lower_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_cond_lower[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
     }
     
     if (pp_final_expt_only == FALSE) {
@@ -326,15 +417,27 @@ save_results_meta <- function() {
     }
     
     if (pp_final_expt_only == FALSE) {
-      meta_base_estimate_lower_pp_c_pb <<- c(meta_base_estimate_lower_pp_c_pb, mean(pp_c_pb_results$b_base_lower))
-      meta_sex_estimate_lower_pp_c_pb <<- c(meta_sex_estimate_lower_pp_c_pb, mean(pp_c_pb_results$b_sex_lower))
-      meta_cond_estimate_lower_pp_c_pb <<- c(meta_cond_estimate_lower_pp_c_pb, mean(pp_c_pb_results$b_cond_lower))
-      meta_sex_cond_estimate_lower_pp_c_pb <<- c(meta_sex_cond_estimate_lower_pp_c_pb, mean(pp_c_pb_results$b_sex_cond_lower))
+      meta_base_estimate_lower_pp_c_pb_sym <<- c(meta_base_estimate_lower_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_base_lower))
+      meta_sex_estimate_lower_pp_c_pb_sym <<- c(meta_sex_estimate_lower_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_lower))
+      meta_cond_estimate_lower_pp_c_pb_sym <<- c(meta_cond_estimate_lower_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_cond_lower))
+      meta_sex_cond_estimate_lower_pp_c_pb_sym <<- c(meta_sex_cond_estimate_lower_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_cond_lower))
     } else {
-      meta_base_estimate_lower_pp_c_pb <<- c(meta_base_estimate_lower_pp_c_pb, mean(pp_c_pb_results$b_base_lower[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_estimate_lower_pp_c_pb <<- c(meta_sex_estimate_lower_pp_c_pb, mean(pp_c_pb_results$b_sex_lower[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_cond_estimate_lower_pp_c_pb <<- c(meta_cond_estimate_lower_pp_c_pb, mean(pp_c_pb_results$b_cond_lower[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_cond_estimate_lower_pp_c_pb <<- c(meta_sex_cond_estimate_lower_pp_c_pb, mean(pp_c_pb_results$b_sex_cond_lower[pp_c_pb_results$expt == n_experiments_per_repeat]))
+      meta_base_estimate_lower_pp_c_pb_sym <<- c(meta_base_estimate_lower_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_base_lower[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_lower_pp_c_pb_sym <<- c(meta_sex_estimate_lower_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_lower[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_lower_pp_c_pb_sym <<- c(meta_cond_estimate_lower_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_cond_lower[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_lower_pp_c_pb_sym <<- c(meta_sex_cond_estimate_lower_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_cond_lower[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+    }
+    
+    if (pp_final_expt_only == FALSE) {
+      meta_base_estimate_lower_pp_c_pb_asym <<- c(meta_base_estimate_lower_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_base_lower))
+      meta_sex_estimate_lower_pp_c_pb_asym <<- c(meta_sex_estimate_lower_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_lower))
+      meta_cond_estimate_lower_pp_c_pb_asym <<- c(meta_cond_estimate_lower_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_cond_lower))
+      meta_sex_cond_estimate_lower_pp_c_pb_asym <<- c(meta_sex_cond_estimate_lower_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_cond_lower))
+    } else {
+      meta_base_estimate_lower_pp_c_pb_asym <<- c(meta_base_estimate_lower_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_base_lower[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_estimate_lower_pp_c_pb_asym <<- c(meta_sex_estimate_lower_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_lower[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_cond_estimate_lower_pp_c_pb_asym <<- c(meta_cond_estimate_lower_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_cond_lower[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_estimate_lower_pp_c_pb_asym <<- c(meta_sex_cond_estimate_lower_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_cond_lower[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
     }
     
   
@@ -352,15 +455,27 @@ save_results_meta <- function() {
     }
     
     if (pp_final_expt_only == FALSE) {
-      meta_base_uncertainty_pp_l_pb <<- c(meta_base_uncertainty_pp_l_pb, mean(pp_l_pb_results$b_base_upper - pp_l_pb_results$b_base_lower))
-      meta_sex_uncertainty_pp_l_pb <<- c(meta_sex_uncertainty_pp_l_pb, mean(pp_l_pb_results$b_sex_upper - pp_l_pb_results$b_sex_lower))
-      meta_cond_uncertainty_pp_l_pb <<- c(meta_cond_uncertainty_pp_l_pb, mean(pp_l_pb_results$b_cond_upper - pp_l_pb_results$b_cond_lower))
-      meta_sex_cond_uncertainty_pp_l_pb <<- c(meta_sex_cond_uncertainty_pp_l_pb, mean(pp_l_pb_results$b_sex_cond_upper - pp_l_pb_results$b_sex_cond_lower))
+      meta_base_uncertainty_pp_l_pb_sym <<- c(meta_base_uncertainty_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_base_upper - pp_l_pb_sym_results$b_base_lower))
+      meta_sex_uncertainty_pp_l_pb_sym <<- c(meta_sex_uncertainty_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_upper - pp_l_pb_sym_results$b_sex_lower))
+      meta_cond_uncertainty_pp_l_pb_sym <<- c(meta_cond_uncertainty_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_cond_upper - pp_l_pb_sym_results$b_cond_lower))
+      meta_sex_cond_uncertainty_pp_l_pb_sym <<- c(meta_sex_cond_uncertainty_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_cond_upper - pp_l_pb_sym_results$b_sex_cond_lower))
     } else {
-      meta_base_uncertainty_pp_l_pb <<- c(meta_base_uncertainty_pp_l_pb, mean(pp_l_pb_results$b_base_upper[pp_l_pb_results$expt == n_experiments_per_repeat] - pp_l_pb_results$b_base_lower[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_uncertainty_pp_l_pb <<- c(meta_sex_uncertainty_pp_l_pb, mean(pp_l_pb_results$b_sex_upper[pp_l_pb_results$expt == n_experiments_per_repeat] - pp_l_pb_results$b_sex_lower[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_cond_uncertainty_pp_l_pb <<- c(meta_cond_uncertainty_pp_l_pb, mean(pp_l_pb_results$b_cond_upper[pp_l_pb_results$expt == n_experiments_per_repeat] - pp_l_pb_results$b_cond_lower[pp_l_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_cond_uncertainty_pp_l_pb <<- c(meta_sex_cond_uncertainty_pp_l_pb, mean(pp_l_pb_results$b_sex_cond_upper[pp_l_pb_results$expt == n_experiments_per_repeat] - pp_l_pb_results$b_sex_cond_lower[pp_l_pb_results$expt == n_experiments_per_repeat]))
+      meta_base_uncertainty_pp_l_pb_sym <<- c(meta_base_uncertainty_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_base_upper[pp_l_pb_sym_results$expt == n_experiments_per_repeat] - pp_l_pb_sym_results$b_base_lower[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_uncertainty_pp_l_pb_sym <<- c(meta_sex_uncertainty_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_upper[pp_l_pb_sym_results$expt == n_experiments_per_repeat] - pp_l_pb_sym_results$b_sex_lower[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_cond_uncertainty_pp_l_pb_sym <<- c(meta_cond_uncertainty_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_cond_upper[pp_l_pb_sym_results$expt == n_experiments_per_repeat] - pp_l_pb_sym_results$b_cond_lower[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_uncertainty_pp_l_pb_sym <<- c(meta_sex_cond_uncertainty_pp_l_pb_sym, mean(pp_l_pb_sym_results$b_sex_cond_upper[pp_l_pb_sym_results$expt == n_experiments_per_repeat] - pp_l_pb_sym_results$b_sex_cond_lower[pp_l_pb_sym_results$expt == n_experiments_per_repeat]))
+    }
+    
+    if (pp_final_expt_only == FALSE) {
+      meta_base_uncertainty_pp_l_pb_asym <<- c(meta_base_uncertainty_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_base_upper - pp_l_pb_asym_results$b_base_lower))
+      meta_sex_uncertainty_pp_l_pb_asym <<- c(meta_sex_uncertainty_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_upper - pp_l_pb_asym_results$b_sex_lower))
+      meta_cond_uncertainty_pp_l_pb_asym <<- c(meta_cond_uncertainty_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_cond_upper - pp_l_pb_asym_results$b_cond_lower))
+      meta_sex_cond_uncertainty_pp_l_pb_asym <<- c(meta_sex_cond_uncertainty_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_cond_upper - pp_l_pb_asym_results$b_sex_cond_lower))
+    } else {
+      meta_base_uncertainty_pp_l_pb_asym <<- c(meta_base_uncertainty_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_base_upper[pp_l_pb_asym_results$expt == n_experiments_per_repeat] - pp_l_pb_asym_results$b_base_lower[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_uncertainty_pp_l_pb_asym <<- c(meta_sex_uncertainty_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_upper[pp_l_pb_asym_results$expt == n_experiments_per_repeat] - pp_l_pb_asym_results$b_sex_lower[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_cond_uncertainty_pp_l_pb_asym <<- c(meta_cond_uncertainty_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_cond_upper[pp_l_pb_asym_results$expt == n_experiments_per_repeat] - pp_l_pb_asym_results$b_cond_lower[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_uncertainty_pp_l_pb_asym <<- c(meta_sex_cond_uncertainty_pp_l_pb_asym, mean(pp_l_pb_asym_results$b_sex_cond_upper[pp_l_pb_asym_results$expt == n_experiments_per_repeat] - pp_l_pb_asym_results$b_sex_cond_lower[pp_l_pb_asym_results$expt == n_experiments_per_repeat]))
     }
     
     if (pp_final_expt_only == FALSE) {
@@ -376,15 +491,27 @@ save_results_meta <- function() {
     }
     
     if (pp_final_expt_only == FALSE) {
-      meta_base_uncertainty_pp_c_pb <<- c(meta_base_uncertainty_pp_c_pb, mean(pp_c_pb_results$b_base_upper - pp_c_pb_results$b_base_lower))
-      meta_sex_uncertainty_pp_c_pb <<- c(meta_sex_uncertainty_pp_c_pb, mean(pp_c_pb_results$b_sex_upper - pp_c_pb_results$b_sex_lower))
-      meta_cond_uncertainty_pp_c_pb <<- c(meta_cond_uncertainty_pp_c_pb, mean(pp_c_pb_results$b_cond_upper - pp_c_pb_results$b_cond_lower))
-      meta_sex_cond_uncertainty_pp_c_pb <<- c(meta_sex_cond_uncertainty_pp_c_pb, mean(pp_c_pb_results$b_sex_cond_upper - pp_c_pb_results$b_sex_cond_lower))
+      meta_base_uncertainty_pp_c_pb_sym <<- c(meta_base_uncertainty_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_base_upper - pp_c_pb_sym_results$b_base_lower))
+      meta_sex_uncertainty_pp_c_pb_sym <<- c(meta_sex_uncertainty_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_upper - pp_c_pb_sym_results$b_sex_lower))
+      meta_cond_uncertainty_pp_c_pb_sym <<- c(meta_cond_uncertainty_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_cond_upper - pp_c_pb_sym_results$b_cond_lower))
+      meta_sex_cond_uncertainty_pp_c_pb_sym <<- c(meta_sex_cond_uncertainty_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_cond_upper - pp_c_pb_sym_results$b_sex_cond_lower))
     } else {
-      meta_base_uncertainty_pp_c_pb <<- c(meta_base_uncertainty_pp_c_pb, mean(pp_c_pb_results$b_base_upper[pp_c_pb_results$expt == n_experiments_per_repeat] - pp_c_pb_results$b_base_lower[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_uncertainty_pp_c_pb <<- c(meta_sex_uncertainty_pp_c_pb, mean(pp_c_pb_results$b_sex_upper[pp_c_pb_results$expt == n_experiments_per_repeat] - pp_c_pb_results$b_sex_lower[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_cond_uncertainty_pp_c_pb <<- c(meta_cond_uncertainty_pp_c_pb, mean(pp_c_pb_results$b_cond_upper[pp_c_pb_results$expt == n_experiments_per_repeat] - pp_c_pb_results$b_cond_lower[pp_c_pb_results$expt == n_experiments_per_repeat]))
-      meta_sex_cond_uncertainty_pp_c_pb <<- c(meta_sex_cond_uncertainty_pp_c_pb, mean(pp_c_pb_results$b_sex_cond_upper[pp_c_pb_results$expt == n_experiments_per_repeat] - pp_c_pb_results$b_sex_cond_lower[pp_c_pb_results$expt == n_experiments_per_repeat]))
+      meta_base_uncertainty_pp_c_pb_sym <<- c(meta_base_uncertainty_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_base_upper[pp_c_pb_sym_results$expt == n_experiments_per_repeat] - pp_c_pb_sym_results$b_base_lower[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_uncertainty_pp_c_pb_sym <<- c(meta_sex_uncertainty_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_upper[pp_c_pb_sym_results$expt == n_experiments_per_repeat] - pp_c_pb_sym_results$b_sex_lower[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_cond_uncertainty_pp_c_pb_sym <<- c(meta_cond_uncertainty_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_cond_upper[pp_c_pb_sym_results$expt == n_experiments_per_repeat] - pp_c_pb_sym_results$b_cond_lower[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_uncertainty_pp_c_pb_sym <<- c(meta_sex_cond_uncertainty_pp_c_pb_sym, mean(pp_c_pb_sym_results$b_sex_cond_upper[pp_c_pb_sym_results$expt == n_experiments_per_repeat] - pp_c_pb_sym_results$b_sex_cond_lower[pp_c_pb_sym_results$expt == n_experiments_per_repeat]))
+    }
+    
+    if (pp_final_expt_only == FALSE) {
+      meta_base_uncertainty_pp_c_pb_asym <<- c(meta_base_uncertainty_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_base_upper - pp_c_pb_asym_results$b_base_lower))
+      meta_sex_uncertainty_pp_c_pb_asym <<- c(meta_sex_uncertainty_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_upper - pp_c_pb_asym_results$b_sex_lower))
+      meta_cond_uncertainty_pp_c_pb_asym <<- c(meta_cond_uncertainty_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_cond_upper - pp_c_pb_asym_results$b_cond_lower))
+      meta_sex_cond_uncertainty_pp_c_pb_asym <<- c(meta_sex_cond_uncertainty_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_cond_upper - pp_c_pb_asym_results$b_sex_cond_lower))
+    } else {
+      meta_base_uncertainty_pp_c_pb_asym <<- c(meta_base_uncertainty_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_base_upper[pp_c_pb_asym_results$expt == n_experiments_per_repeat] - pp_c_pb_asym_results$b_base_lower[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_uncertainty_pp_c_pb_asym <<- c(meta_sex_uncertainty_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_upper[pp_c_pb_asym_results$expt == n_experiments_per_repeat] - pp_c_pb_asym_results$b_sex_lower[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_cond_uncertainty_pp_c_pb_asym <<- c(meta_cond_uncertainty_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_cond_upper[pp_c_pb_asym_results$expt == n_experiments_per_repeat] - pp_c_pb_asym_results$b_cond_lower[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
+      meta_sex_cond_uncertainty_pp_c_pb_asym <<- c(meta_sex_cond_uncertainty_pp_c_pb_asym, mean(pp_c_pb_asym_results$b_sex_cond_upper[pp_c_pb_asym_results$expt == n_experiments_per_repeat] - pp_c_pb_asym_results$b_sex_cond_lower[pp_c_pb_asym_results$expt == n_experiments_per_repeat]))
     }
     
   }
@@ -396,101 +523,145 @@ compile_meta_results <- function() {
   meta_cond_estimate_pp_l_p <- exp(meta_cond_estimate_pp_l+meta_base_estimate_pp_l)/(1+exp(meta_cond_estimate_pp_l+meta_base_estimate_pp_l)) - meta_base_estimate_pp_l_p
   meta_sex_cond_estimate_pp_l_p <- exp(meta_sex_cond_estimate_pp_l + meta_sex_estimate_pp_l + meta_cond_estimate_pp_l + meta_base_estimate_pp_l)/(1+exp(meta_sex_cond_estimate_pp_l + meta_sex_estimate_pp_l + meta_cond_estimate_pp_l + meta_base_estimate_pp_l)) - (meta_base_estimate_pp_l_p + meta_sex_estimate_pp_l_p + meta_cond_estimate_pp_l_p)
   
-  meta_base_estimate_pp_l_pb_p <- exp(meta_base_estimate_pp_l_pb)/(1+exp(meta_base_estimate_pp_l_pb))
-  meta_sex_estimate_pp_l_pb_p <- exp(meta_sex_estimate_pp_l_pb+meta_base_estimate_pp_l_pb)/(1+exp(meta_sex_estimate_pp_l_pb+meta_base_estimate_pp_l_pb)) - meta_base_estimate_pp_l_pb_p
-  meta_cond_estimate_pp_l_pb_p <- exp(meta_cond_estimate_pp_l_pb+meta_base_estimate_pp_l_pb)/(1+exp(meta_cond_estimate_pp_l_pb+meta_base_estimate_pp_l_pb)) - meta_base_estimate_pp_l_pb_p
-  meta_sex_cond_estimate_pp_l_pb_p <- exp(meta_sex_cond_estimate_pp_l_pb + meta_sex_estimate_pp_l_pb + meta_cond_estimate_pp_l_pb + meta_base_estimate_pp_l_pb)/(1+exp(meta_sex_cond_estimate_pp_l_pb + meta_sex_estimate_pp_l_pb + meta_cond_estimate_pp_l_pb + meta_base_estimate_pp_l_pb)) - (meta_base_estimate_pp_l_pb_p + meta_sex_estimate_pp_l_pb_p + meta_cond_estimate_pp_l_pb_p)
+  meta_base_estimate_pp_l_pb_sym_p <- exp(meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_base_estimate_pp_l_pb_sym))
+  meta_sex_estimate_pp_l_pb_sym_p <- exp(meta_sex_estimate_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_sex_estimate_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)) - meta_base_estimate_pp_l_pb_sym_p
+  meta_cond_estimate_pp_l_pb_sym_p <- exp(meta_cond_estimate_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_cond_estimate_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)) - meta_base_estimate_pp_l_pb_sym_p
+  meta_sex_cond_estimate_pp_l_pb_sym_p <- exp(meta_sex_cond_estimate_pp_l_pb_sym + meta_sex_estimate_pp_l_pb_sym + meta_cond_estimate_pp_l_pb_sym + meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_sex_cond_estimate_pp_l_pb_sym + meta_sex_estimate_pp_l_pb_sym + meta_cond_estimate_pp_l_pb_sym + meta_base_estimate_pp_l_pb_sym)) - (meta_base_estimate_pp_l_pb_sym_p + meta_sex_estimate_pp_l_pb_sym_p + meta_cond_estimate_pp_l_pb_sym_p)
+  
+  meta_base_estimate_pp_l_pb_asym_p <- exp(meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_base_estimate_pp_l_pb_asym))
+  meta_sex_estimate_pp_l_pb_asym_p <- exp(meta_sex_estimate_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_sex_estimate_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)) - meta_base_estimate_pp_l_pb_asym_p
+  meta_cond_estimate_pp_l_pb_asym_p <- exp(meta_cond_estimate_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_cond_estimate_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)) - meta_base_estimate_pp_l_pb_asym_p
+  meta_sex_cond_estimate_pp_l_pb_asym_p <- exp(meta_sex_cond_estimate_pp_l_pb_asym + meta_sex_estimate_pp_l_pb_asym + meta_cond_estimate_pp_l_pb_asym + meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_sex_cond_estimate_pp_l_pb_asym + meta_sex_estimate_pp_l_pb_asym + meta_cond_estimate_pp_l_pb_asym + meta_base_estimate_pp_l_pb_asym)) - (meta_base_estimate_pp_l_pb_asym_p + meta_sex_estimate_pp_l_pb_asym_p + meta_cond_estimate_pp_l_pb_asym_p)
   
   meta_base_estimate_pp_c_p <- exp(meta_base_estimate_pp_c)/(1+exp(meta_base_estimate_pp_c))
   meta_sex_estimate_pp_c_p <- exp(meta_sex_estimate_pp_c+meta_base_estimate_pp_c)/(1+exp(meta_sex_estimate_pp_c+meta_base_estimate_pp_c)) - meta_base_estimate_pp_c_p
   meta_cond_estimate_pp_c_p <- exp(meta_cond_estimate_pp_c+meta_base_estimate_pp_c)/(1+exp(meta_cond_estimate_pp_c+meta_base_estimate_pp_c)) - meta_base_estimate_pp_c_p
   meta_sex_cond_estimate_pp_c_p <- exp(meta_sex_cond_estimate_pp_c + meta_sex_estimate_pp_c + meta_cond_estimate_pp_c + meta_base_estimate_pp_c)/(1+exp(meta_sex_cond_estimate_pp_c + meta_sex_estimate_pp_c + meta_cond_estimate_pp_c + meta_base_estimate_pp_c)) - (meta_base_estimate_pp_c_p + meta_sex_estimate_pp_c_p + meta_cond_estimate_pp_c_p)
   
-  meta_base_estimate_pp_c_pb_p <- exp(meta_base_estimate_pp_c_pb)/(1+exp(meta_base_estimate_pp_c_pb))
-  meta_sex_estimate_pp_c_pb_p <- exp(meta_sex_estimate_pp_c_pb+meta_base_estimate_pp_c_pb)/(1+exp(meta_sex_estimate_pp_c_pb+meta_base_estimate_pp_c_pb)) - meta_base_estimate_pp_c_pb_p
-  meta_cond_estimate_pp_c_pb_p <- exp(meta_cond_estimate_pp_c_pb+meta_base_estimate_pp_c_pb)/(1+exp(meta_cond_estimate_pp_c_pb+meta_base_estimate_pp_c_pb)) - meta_base_estimate_pp_c_pb_p
-  meta_sex_cond_estimate_pp_c_pb_p <- exp(meta_sex_cond_estimate_pp_c_pb + meta_sex_estimate_pp_c_pb + meta_cond_estimate_pp_c_pb + meta_base_estimate_pp_c_pb)/(1+exp(meta_sex_cond_estimate_pp_c_pb + meta_sex_estimate_pp_c_pb + meta_cond_estimate_pp_c_pb + meta_base_estimate_pp_c_pb)) - (meta_base_estimate_pp_c_pb_p + meta_sex_estimate_pp_c_pb_p + meta_cond_estimate_pp_c_pb_p)
+  meta_base_estimate_pp_c_pb_sym_p <- exp(meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_base_estimate_pp_c_pb_sym))
+  meta_sex_estimate_pp_c_pb_sym_p <- exp(meta_sex_estimate_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_sex_estimate_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)) - meta_base_estimate_pp_c_pb_sym_p
+  meta_cond_estimate_pp_c_pb_sym_p <- exp(meta_cond_estimate_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_cond_estimate_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)) - meta_base_estimate_pp_c_pb_sym_p
+  meta_sex_cond_estimate_pp_c_pb_sym_p <- exp(meta_sex_cond_estimate_pp_c_pb_sym + meta_sex_estimate_pp_c_pb_sym + meta_cond_estimate_pp_c_pb_sym + meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_sex_cond_estimate_pp_c_pb_sym + meta_sex_estimate_pp_c_pb_sym + meta_cond_estimate_pp_c_pb_sym + meta_base_estimate_pp_c_pb_sym)) - (meta_base_estimate_pp_c_pb_sym_p + meta_sex_estimate_pp_c_pb_sym_p + meta_cond_estimate_pp_c_pb_sym_p)
   
+  meta_base_estimate_pp_c_pb_asym_p <- exp(meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_base_estimate_pp_c_pb_asym))
+  meta_sex_estimate_pp_c_pb_asym_p <- exp(meta_sex_estimate_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_sex_estimate_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)) - meta_base_estimate_pp_c_pb_asym_p
+  meta_cond_estimate_pp_c_pb_asym_p <- exp(meta_cond_estimate_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_cond_estimate_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)) - meta_base_estimate_pp_c_pb_asym_p
+  meta_sex_cond_estimate_pp_c_pb_asym_p <- exp(meta_sex_cond_estimate_pp_c_pb_asym + meta_sex_estimate_pp_c_pb_asym + meta_cond_estimate_pp_c_pb_asym + meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_sex_cond_estimate_pp_c_pb_asym + meta_sex_estimate_pp_c_pb_asym + meta_cond_estimate_pp_c_pb_asym + meta_base_estimate_pp_c_pb_asym)) - (meta_base_estimate_pp_c_pb_asym_p + meta_sex_estimate_pp_c_pb_asym_p + meta_cond_estimate_pp_c_pb_asym_p)
   
   meta_base_uncertainty_pp_l_p <- exp(meta_base_estimate_upper_pp_l)/(1+exp(meta_base_estimate_upper_pp_l)) - exp(meta_base_estimate_lower_pp_l)/(1+exp(meta_base_estimate_lower_pp_l))
   meta_sex_uncertainty_pp_l_p <- exp(meta_sex_estimate_upper_pp_l+meta_base_estimate_pp_l)/(1+exp(meta_sex_estimate_upper_pp_l+meta_base_estimate_pp_l)) - exp(meta_sex_estimate_lower_pp_l+meta_base_estimate_pp_l)/(1+exp(meta_sex_estimate_lower_pp_l+meta_base_estimate_pp_l))
   meta_cond_uncertainty_pp_l_p <- exp(meta_cond_estimate_upper_pp_l+meta_base_estimate_pp_l)/(1+exp(meta_cond_estimate_upper_pp_l+meta_base_estimate_pp_l)) - exp(meta_cond_estimate_lower_pp_l+meta_base_estimate_pp_l)/(1+exp(meta_cond_estimate_lower_pp_l+meta_base_estimate_pp_l))
   meta_sex_cond_uncertainty_pp_l_p <- exp(meta_sex_cond_estimate_upper_pp_l + meta_sex_estimate_pp_l + meta_cond_estimate_pp_l +meta_base_estimate_pp_l)/(1+exp(meta_sex_cond_estimate_upper_pp_l + meta_sex_estimate_pp_l + meta_cond_estimate_pp_l +meta_base_estimate_pp_l)) - exp(meta_sex_cond_estimate_lower_pp_l + meta_sex_estimate_pp_l + meta_cond_estimate_pp_l +meta_base_estimate_pp_l)/(1+exp(meta_sex_cond_estimate_lower_pp_l + meta_sex_estimate_pp_l + meta_cond_estimate_pp_l +meta_base_estimate_pp_l))
   
-  meta_base_uncertainty_pp_l_pb_p <- exp(meta_base_estimate_upper_pp_l_pb)/(1+exp(meta_base_estimate_upper_pp_l_pb)) - exp(meta_base_estimate_lower_pp_l_pb)/(1+exp(meta_base_estimate_lower_pp_l_pb))
-  meta_sex_uncertainty_pp_l_pb_p <- exp(meta_sex_estimate_upper_pp_l_pb+meta_base_estimate_pp_l_pb)/(1+exp(meta_sex_estimate_upper_pp_l_pb+meta_base_estimate_pp_l_pb)) - exp(meta_sex_estimate_lower_pp_l_pb+meta_base_estimate_pp_l_pb)/(1+exp(meta_sex_estimate_lower_pp_l_pb+meta_base_estimate_pp_l_pb))
-  meta_cond_uncertainty_pp_l_pb_p <- exp(meta_cond_estimate_upper_pp_l_pb+meta_base_estimate_pp_l_pb)/(1+exp(meta_cond_estimate_upper_pp_l_pb+meta_base_estimate_pp_l_pb)) - exp(meta_cond_estimate_lower_pp_l_pb+meta_base_estimate_pp_l_pb)/(1+exp(meta_cond_estimate_lower_pp_l_pb+meta_base_estimate_pp_l_pb))
-  meta_sex_cond_uncertainty_pp_l_pb_p <- exp(meta_sex_cond_estimate_upper_pp_l_pb + meta_sex_estimate_pp_l_pb + meta_cond_estimate_pp_l_pb +meta_base_estimate_pp_l_pb)/(1+exp(meta_sex_cond_estimate_upper_pp_l_pb + meta_sex_estimate_pp_l_pb + meta_cond_estimate_pp_l_pb +meta_base_estimate_pp_l_pb)) - exp(meta_sex_cond_estimate_lower_pp_l_pb + meta_sex_estimate_pp_l_pb + meta_cond_estimate_pp_l_pb +meta_base_estimate_pp_l_pb)/(1+exp(meta_sex_cond_estimate_lower_pp_l_pb + meta_sex_estimate_pp_l_pb + meta_cond_estimate_pp_l_pb +meta_base_estimate_pp_l_pb))
+  meta_base_uncertainty_pp_l_pb_sym_p <- exp(meta_base_estimate_upper_pp_l_pb_sym)/(1+exp(meta_base_estimate_upper_pp_l_pb_sym)) - exp(meta_base_estimate_lower_pp_l_pb_sym)/(1+exp(meta_base_estimate_lower_pp_l_pb_sym))
+  meta_sex_uncertainty_pp_l_pb_sym_p <- exp(meta_sex_estimate_upper_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_sex_estimate_upper_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)) - exp(meta_sex_estimate_lower_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_sex_estimate_lower_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym))
+  meta_cond_uncertainty_pp_l_pb_sym_p <- exp(meta_cond_estimate_upper_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_cond_estimate_upper_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)) - exp(meta_cond_estimate_lower_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_cond_estimate_lower_pp_l_pb_sym+meta_base_estimate_pp_l_pb_sym))
+  meta_sex_cond_uncertainty_pp_l_pb_sym_p <- exp(meta_sex_cond_estimate_upper_pp_l_pb_sym + meta_sex_estimate_pp_l_pb_sym + meta_cond_estimate_pp_l_pb_sym +meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_sex_cond_estimate_upper_pp_l_pb_sym + meta_sex_estimate_pp_l_pb_sym + meta_cond_estimate_pp_l_pb_sym +meta_base_estimate_pp_l_pb_sym)) - exp(meta_sex_cond_estimate_lower_pp_l_pb_sym + meta_sex_estimate_pp_l_pb_sym + meta_cond_estimate_pp_l_pb_sym +meta_base_estimate_pp_l_pb_sym)/(1+exp(meta_sex_cond_estimate_lower_pp_l_pb_sym + meta_sex_estimate_pp_l_pb_sym + meta_cond_estimate_pp_l_pb_sym +meta_base_estimate_pp_l_pb_sym))
+  
+  meta_base_uncertainty_pp_l_pb_asym_p <- exp(meta_base_estimate_upper_pp_l_pb_asym)/(1+exp(meta_base_estimate_upper_pp_l_pb_asym)) - exp(meta_base_estimate_lower_pp_l_pb_asym)/(1+exp(meta_base_estimate_lower_pp_l_pb_asym))
+  meta_sex_uncertainty_pp_l_pb_asym_p <- exp(meta_sex_estimate_upper_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_sex_estimate_upper_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)) - exp(meta_sex_estimate_lower_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_sex_estimate_lower_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym))
+  meta_cond_uncertainty_pp_l_pb_asym_p <- exp(meta_cond_estimate_upper_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_cond_estimate_upper_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)) - exp(meta_cond_estimate_lower_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_cond_estimate_lower_pp_l_pb_asym+meta_base_estimate_pp_l_pb_asym))
+  meta_sex_cond_uncertainty_pp_l_pb_asym_p <- exp(meta_sex_cond_estimate_upper_pp_l_pb_asym + meta_sex_estimate_pp_l_pb_asym + meta_cond_estimate_pp_l_pb_asym +meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_sex_cond_estimate_upper_pp_l_pb_asym + meta_sex_estimate_pp_l_pb_asym + meta_cond_estimate_pp_l_pb_asym +meta_base_estimate_pp_l_pb_asym)) - exp(meta_sex_cond_estimate_lower_pp_l_pb_asym + meta_sex_estimate_pp_l_pb_asym + meta_cond_estimate_pp_l_pb_asym +meta_base_estimate_pp_l_pb_asym)/(1+exp(meta_sex_cond_estimate_lower_pp_l_pb_asym + meta_sex_estimate_pp_l_pb_asym + meta_cond_estimate_pp_l_pb_asym +meta_base_estimate_pp_l_pb_asym))
   
   meta_base_uncertainty_pp_c_p <- exp(meta_base_estimate_upper_pp_c)/(1+exp(meta_base_estimate_upper_pp_c)) - exp(meta_base_estimate_lower_pp_c)/(1+exp(meta_base_estimate_lower_pp_c))
   meta_sex_uncertainty_pp_c_p <- exp(meta_sex_estimate_upper_pp_c+meta_base_estimate_pp_c)/(1+exp(meta_sex_estimate_upper_pp_c+meta_base_estimate_pp_c)) - exp(meta_sex_estimate_lower_pp_c+meta_base_estimate_pp_c)/(1+exp(meta_sex_estimate_lower_pp_c+meta_base_estimate_pp_c))
   meta_cond_uncertainty_pp_c_p <- exp(meta_cond_estimate_upper_pp_c+meta_base_estimate_pp_c)/(1+exp(meta_cond_estimate_upper_pp_c+meta_base_estimate_pp_c)) - exp(meta_cond_estimate_lower_pp_c+meta_base_estimate_pp_c)/(1+exp(meta_cond_estimate_lower_pp_c+meta_base_estimate_pp_c))
   meta_sex_cond_uncertainty_pp_c_p <- exp(meta_sex_cond_estimate_upper_pp_c + meta_sex_estimate_pp_c + meta_cond_estimate_pp_c +meta_base_estimate_pp_c)/(1+exp(meta_sex_cond_estimate_upper_pp_c + meta_sex_estimate_pp_c + meta_cond_estimate_pp_c +meta_base_estimate_pp_c)) - exp(meta_sex_cond_estimate_lower_pp_c + meta_sex_estimate_pp_c + meta_cond_estimate_pp_c +meta_base_estimate_pp_c)/(1+exp(meta_sex_cond_estimate_lower_pp_c + meta_sex_estimate_pp_c + meta_cond_estimate_pp_c +meta_base_estimate_pp_c))
   
-  meta_base_uncertainty_pp_c_pb_p <- exp(meta_base_estimate_upper_pp_c_pb)/(1+exp(meta_base_estimate_upper_pp_c_pb)) - exp(meta_base_estimate_lower_pp_c_pb)/(1+exp(meta_base_estimate_lower_pp_c_pb))
-  meta_sex_uncertainty_pp_c_pb_p <- exp(meta_sex_estimate_upper_pp_c_pb+meta_base_estimate_pp_c_pb)/(1+exp(meta_sex_estimate_upper_pp_c_pb+meta_base_estimate_pp_c_pb)) - exp(meta_sex_estimate_lower_pp_c_pb+meta_base_estimate_pp_c_pb)/(1+exp(meta_sex_estimate_lower_pp_c_pb+meta_base_estimate_pp_c_pb))
-  meta_cond_uncertainty_pp_c_pb_p <- exp(meta_cond_estimate_upper_pp_c_pb+meta_base_estimate_pp_c_pb)/(1+exp(meta_cond_estimate_upper_pp_c_pb+meta_base_estimate_pp_c_pb)) - exp(meta_cond_estimate_lower_pp_c_pb+meta_base_estimate_pp_c_pb)/(1+exp(meta_cond_estimate_lower_pp_c_pb+meta_base_estimate_pp_c_pb))
-  meta_sex_cond_uncertainty_pp_c_pb_p <- exp(meta_sex_cond_estimate_upper_pp_c_pb + meta_sex_estimate_pp_c_pb + meta_cond_estimate_pp_c_pb +meta_base_estimate_pp_c_pb)/(1+exp(meta_sex_cond_estimate_upper_pp_c_pb + meta_sex_estimate_pp_c_pb + meta_cond_estimate_pp_c_pb +meta_base_estimate_pp_c_pb)) - exp(meta_sex_cond_estimate_lower_pp_c_pb + meta_sex_estimate_pp_c_pb + meta_cond_estimate_pp_c_pb +meta_base_estimate_pp_c_pb)/(1+exp(meta_sex_cond_estimate_lower_pp_c_pb + meta_sex_estimate_pp_c_pb + meta_cond_estimate_pp_c_pb +meta_base_estimate_pp_c_pb))
+  meta_base_uncertainty_pp_c_pb_sym_p <- exp(meta_base_estimate_upper_pp_c_pb_sym)/(1+exp(meta_base_estimate_upper_pp_c_pb_sym)) - exp(meta_base_estimate_lower_pp_c_pb_sym)/(1+exp(meta_base_estimate_lower_pp_c_pb_sym))
+  meta_sex_uncertainty_pp_c_pb_sym_p <- exp(meta_sex_estimate_upper_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_sex_estimate_upper_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)) - exp(meta_sex_estimate_lower_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_sex_estimate_lower_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym))
+  meta_cond_uncertainty_pp_c_pb_sym_p <- exp(meta_cond_estimate_upper_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_cond_estimate_upper_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)) - exp(meta_cond_estimate_lower_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_cond_estimate_lower_pp_c_pb_sym+meta_base_estimate_pp_c_pb_sym))
+  meta_sex_cond_uncertainty_pp_c_pb_sym_p <- exp(meta_sex_cond_estimate_upper_pp_c_pb_sym + meta_sex_estimate_pp_c_pb_sym + meta_cond_estimate_pp_c_pb_sym +meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_sex_cond_estimate_upper_pp_c_pb_sym + meta_sex_estimate_pp_c_pb_sym + meta_cond_estimate_pp_c_pb_sym +meta_base_estimate_pp_c_pb_sym)) - exp(meta_sex_cond_estimate_lower_pp_c_pb_sym + meta_sex_estimate_pp_c_pb_sym + meta_cond_estimate_pp_c_pb_sym +meta_base_estimate_pp_c_pb_sym)/(1+exp(meta_sex_cond_estimate_lower_pp_c_pb_sym + meta_sex_estimate_pp_c_pb_sym + meta_cond_estimate_pp_c_pb_sym +meta_base_estimate_pp_c_pb_sym))
+  
+  meta_base_uncertainty_pp_c_pb_asym_p <- exp(meta_base_estimate_upper_pp_c_pb_asym)/(1+exp(meta_base_estimate_upper_pp_c_pb_asym)) - exp(meta_base_estimate_lower_pp_c_pb_asym)/(1+exp(meta_base_estimate_lower_pp_c_pb_asym))
+  meta_sex_uncertainty_pp_c_pb_asym_p <- exp(meta_sex_estimate_upper_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_sex_estimate_upper_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)) - exp(meta_sex_estimate_lower_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_sex_estimate_lower_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym))
+  meta_cond_uncertainty_pp_c_pb_asym_p <- exp(meta_cond_estimate_upper_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_cond_estimate_upper_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)) - exp(meta_cond_estimate_lower_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_cond_estimate_lower_pp_c_pb_asym+meta_base_estimate_pp_c_pb_asym))
+  meta_sex_cond_uncertainty_pp_c_pb_asym_p <- exp(meta_sex_cond_estimate_upper_pp_c_pb_asym + meta_sex_estimate_pp_c_pb_asym + meta_cond_estimate_pp_c_pb_asym +meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_sex_cond_estimate_upper_pp_c_pb_asym + meta_sex_estimate_pp_c_pb_asym + meta_cond_estimate_pp_c_pb_asym +meta_base_estimate_pp_c_pb_asym)) - exp(meta_sex_cond_estimate_lower_pp_c_pb_asym + meta_sex_estimate_pp_c_pb_asym + meta_cond_estimate_pp_c_pb_asym +meta_base_estimate_pp_c_pb_asym)/(1+exp(meta_sex_cond_estimate_lower_pp_c_pb_asym + meta_sex_estimate_pp_c_pb_asym + meta_cond_estimate_pp_c_pb_asym +meta_base_estimate_pp_c_pb_asym))
   
   return(data.frame(meta_n_repeats,meta_n_experiments_per_repeat, meta_n_participants_per_experiment,
                     meta_n_trials_per_participant, meta_n_people,
                     meta_true_base, meta_true_sex, meta_true_cond, meta_true_sex_cond,
-                    pub_pp_l, pub_pp_l_pb, pub_pp_c, pub_pp_c_pb, meta_var_pop,
+                    pub_pp_l,pub_pp_l_pb_sym, pub_pp_l_pb_asym, pub_pp_c, pub_pp_c_pb_sym, pub_pp_c_pb_asym, meta_var_pop,
                     meta_base_estimate_pp_l, meta_sex_estimate_pp_l, meta_cond_estimate_pp_l, meta_sex_cond_estimate_pp_l,
-                    meta_base_estimate_pp_l_pb, meta_sex_estimate_pp_l_pb, meta_cond_estimate_pp_l_pb, meta_sex_cond_estimate_pp_l_pb,
+                    meta_base_estimate_pp_l_pb_sym, meta_sex_estimate_pp_l_pb_sym, meta_cond_estimate_pp_l_pb_sym, meta_sex_cond_estimate_pp_l_pb_sym,
+                    meta_base_estimate_pp_l_pb_asym, meta_sex_estimate_pp_l_pb_asym, meta_cond_estimate_pp_l_pb_asym, meta_sex_cond_estimate_pp_l_pb_asym,
                     meta_base_estimate_pp_c, meta_sex_estimate_pp_c, meta_cond_estimate_pp_c, meta_sex_cond_estimate_pp_c,
-                    meta_base_estimate_pp_c_pb, meta_sex_estimate_pp_c_pb, meta_cond_estimate_pp_c_pb, meta_sex_cond_estimate_pp_c_pb,
+                    meta_base_estimate_pp_c_pb_sym, meta_sex_estimate_pp_c_pb_sym, meta_cond_estimate_pp_c_pb_sym, meta_sex_cond_estimate_pp_c_pb_sym,
+                    meta_base_estimate_pp_c_pb_asym, meta_sex_estimate_pp_c_pb_asym, meta_cond_estimate_pp_c_pb_asym, meta_sex_cond_estimate_pp_c_pb_asym,
                     meta_base_estimate_pp_l_p, meta_sex_estimate_pp_l_p, meta_cond_estimate_pp_l_p, meta_sex_cond_estimate_pp_l_p,
-                    meta_base_estimate_pp_l_pb_p, meta_sex_estimate_pp_l_pb_p, meta_cond_estimate_pp_l_pb_p, meta_sex_cond_estimate_pp_l_pb_p,
+                    meta_base_estimate_pp_l_pb_sym_p, meta_sex_estimate_pp_l_pb_sym_p, meta_cond_estimate_pp_l_pb_sym_p, meta_sex_cond_estimate_pp_l_pb_sym_p,
+                    meta_base_estimate_pp_l_pb_asym_p, meta_sex_estimate_pp_l_pb_asym_p, meta_cond_estimate_pp_l_pb_asym_p, meta_sex_cond_estimate_pp_l_pb_asym_p,
                     meta_base_estimate_pp_c_p, meta_sex_estimate_pp_c_p, meta_cond_estimate_pp_c_p, meta_sex_cond_estimate_pp_c_p,
-                    meta_base_estimate_pp_c_pb_p, meta_sex_estimate_pp_c_pb_p, meta_cond_estimate_pp_c_pb_p, meta_sex_cond_estimate_pp_c_pb_p,
+                    meta_base_estimate_pp_c_pb_sym_p, meta_sex_estimate_pp_c_pb_sym_p, meta_cond_estimate_pp_c_pb_sym_p, meta_sex_cond_estimate_pp_c_pb_sym_p,
+                    meta_base_estimate_pp_c_pb_asym_p, meta_sex_estimate_pp_c_pb_asym_p, meta_cond_estimate_pp_c_pb_asym_p, meta_sex_cond_estimate_pp_c_pb_asym_p,
                     meta_base_estimate_lower_pp_l, meta_sex_estimate_lower_pp_l, meta_cond_estimate_lower_pp_l, meta_sex_cond_estimate_lower_pp_l,
-                    meta_base_estimate_lower_pp_l_pb, meta_sex_estimate_lower_pp_l_pb, meta_cond_estimate_lower_pp_l_pb, meta_sex_cond_estimate_lower_pp_l_pb,
+                    meta_base_estimate_lower_pp_l_pb_sym, meta_sex_estimate_lower_pp_l_pb_sym, meta_cond_estimate_lower_pp_l_pb_sym, meta_sex_cond_estimate_lower_pp_l_pb_sym,
+                    meta_base_estimate_lower_pp_l_pb_asym, meta_sex_estimate_lower_pp_l_pb_asym, meta_cond_estimate_lower_pp_l_pb_asym, meta_sex_cond_estimate_lower_pp_l_pb_asym,
                     meta_base_estimate_lower_pp_c, meta_sex_estimate_lower_pp_c, meta_cond_estimate_lower_pp_c, meta_sex_cond_estimate_lower_pp_c,
-                    meta_base_estimate_lower_pp_c_pb, meta_sex_estimate_lower_pp_c_pb, meta_cond_estimate_lower_pp_c_pb, meta_sex_cond_estimate_lower_pp_c_pb,
+                    meta_base_estimate_lower_pp_c_pb_sym, meta_sex_estimate_lower_pp_c_pb_sym, meta_cond_estimate_lower_pp_c_pb_sym, meta_sex_cond_estimate_lower_pp_c_pb_sym,
+                    meta_base_estimate_lower_pp_c_pb_asym, meta_sex_estimate_lower_pp_c_pb_asym, meta_cond_estimate_lower_pp_c_pb_asym, meta_sex_cond_estimate_lower_pp_c_pb_asym,
                     meta_base_estimate_upper_pp_l, meta_sex_estimate_upper_pp_l, meta_cond_estimate_upper_pp_l, meta_sex_cond_estimate_upper_pp_l,
-                    meta_base_estimate_upper_pp_l_pb, meta_sex_estimate_upper_pp_l_pb, meta_cond_estimate_upper_pp_l_pb, meta_sex_cond_estimate_upper_pp_l_pb,
+                    meta_base_estimate_upper_pp_l_pb_sym, meta_sex_estimate_upper_pp_l_pb_sym, meta_cond_estimate_upper_pp_l_pb_sym, meta_sex_cond_estimate_upper_pp_l_pb_sym,
+                    meta_base_estimate_upper_pp_l_pb_asym, meta_sex_estimate_upper_pp_l_pb_asym, meta_cond_estimate_upper_pp_l_pb_asym, meta_sex_cond_estimate_upper_pp_l_pb_asym,
                     meta_base_estimate_upper_pp_c, meta_sex_estimate_upper_pp_c, meta_cond_estimate_upper_pp_c, meta_sex_cond_estimate_upper_pp_c,
-                    meta_base_estimate_upper_pp_c_pb, meta_sex_estimate_upper_pp_c_pb, meta_cond_estimate_upper_pp_c_pb, meta_sex_cond_estimate_upper_pp_c_pb,
+                    meta_base_estimate_upper_pp_c_pb_sym, meta_sex_estimate_upper_pp_c_pb_sym, meta_cond_estimate_upper_pp_c_pb_sym, meta_sex_cond_estimate_upper_pp_c_pb_sym,
+                    meta_base_estimate_upper_pp_c_pb_asym, meta_sex_estimate_upper_pp_c_pb_asym, meta_cond_estimate_upper_pp_c_pb_asym, meta_sex_cond_estimate_upper_pp_c_pb_asym,
                     meta_base_uncertainty_pp_l, meta_sex_uncertainty_pp_l, meta_cond_uncertainty_pp_l, meta_sex_cond_uncertainty_pp_l,
-                    meta_base_uncertainty_pp_l_pb, meta_sex_uncertainty_pp_l_pb, meta_cond_uncertainty_pp_l_pb, meta_sex_cond_uncertainty_pp_l_pb,
+                    meta_base_uncertainty_pp_l_pb_sym, meta_sex_uncertainty_pp_l_pb_sym, meta_cond_uncertainty_pp_l_pb_sym, meta_sex_cond_uncertainty_pp_l_pb_sym,
+                    meta_base_uncertainty_pp_l_pb_asym, meta_sex_uncertainty_pp_l_pb_asym, meta_cond_uncertainty_pp_l_pb_asym, meta_sex_cond_uncertainty_pp_l_pb_asym,
                     meta_base_uncertainty_pp_c, meta_sex_uncertainty_pp_c, meta_cond_uncertainty_pp_c, meta_sex_cond_uncertainty_pp_c,
-                    meta_base_uncertainty_pp_c_pb, meta_sex_uncertainty_pp_c_pb, meta_cond_uncertainty_pp_c_pb, meta_sex_cond_uncertainty_pp_c_pb,
+                    meta_base_uncertainty_pp_c_pb_sym, meta_sex_uncertainty_pp_c_pb_sym, meta_cond_uncertainty_pp_c_pb_sym, meta_sex_cond_uncertainty_pp_c_pb_sym,
+                    meta_base_uncertainty_pp_c_pb_asym, meta_sex_uncertainty_pp_c_pb_asym, meta_cond_uncertainty_pp_c_pb_asym, meta_sex_cond_uncertainty_pp_c_pb_asym,
                     meta_base_uncertainty_pp_l_p, meta_sex_uncertainty_pp_l_p, meta_cond_uncertainty_pp_l_p, meta_sex_cond_uncertainty_pp_l_p,
-                    meta_base_uncertainty_pp_l_pb_p, meta_sex_uncertainty_pp_l_pb_p, meta_cond_uncertainty_pp_l_pb_p, meta_sex_cond_uncertainty_pp_l_pb_p,
+                    meta_base_uncertainty_pp_l_pb_sym_p, meta_sex_uncertainty_pp_l_pb_sym_p, meta_cond_uncertainty_pp_l_pb_sym_p, meta_sex_cond_uncertainty_pp_l_pb_sym_p,
+                    meta_base_uncertainty_pp_l_pb_asym_p, meta_sex_uncertainty_pp_l_pb_asym_p, meta_cond_uncertainty_pp_l_pb_asym_p, meta_sex_cond_uncertainty_pp_l_pb_asym_p,
                     meta_base_uncertainty_pp_c_p, meta_sex_uncertainty_pp_c_p, meta_cond_uncertainty_pp_c_p, meta_sex_cond_uncertainty_pp_c_p,
-                    meta_base_uncertainty_pp_c_pb_p, meta_sex_uncertainty_pp_c_pb_p, meta_cond_uncertainty_pp_c_pb_p, meta_sex_cond_uncertainty_pp_c_pb_p))
+                    meta_base_uncertainty_pp_c_pb_sym_p, meta_sex_uncertainty_pp_c_pb_sym_p, meta_cond_uncertainty_pp_c_pb_sym_p, meta_sex_cond_uncertainty_pp_c_pb_sym_p,
+                    meta_base_uncertainty_pp_c_pb_asym_p, meta_sex_uncertainty_pp_c_pb_asym_p, meta_cond_uncertainty_pp_c_pb_asym_p, meta_sex_cond_uncertainty_pp_c_pb_asym_p))
 }
+
 
 tidy_workspace <- function() {
   rm(meta_n_repeats,meta_n_experiments_per_repeat, meta_n_participants_per_experiment,
      meta_n_trials_per_participant, meta_n_people,
      meta_true_base, meta_true_sex, meta_true_cond, meta_true_sex_cond, 
-     pub_pp_l, pub_pp_l_pb, pub_pp_c, pub_pp_c_pb, meta_var_pop,
+     pub_pp_l,pub_pp_l_pb_sym, pub_pp_l_pb_asym, pub_pp_c, pub_pp_c_pb_sym, pub_pp_c_pb_asym, meta_var_pop,
      meta_base_estimate_pp_l, meta_sex_estimate_pp_l, meta_cond_estimate_pp_l, meta_sex_cond_estimate_pp_l,
-     meta_base_estimate_pp_l_pb, meta_sex_estimate_pp_l_pb, meta_cond_estimate_pp_l_pb, meta_sex_cond_estimate_pp_l_pb,
+     meta_base_estimate_pp_l_pb_sym, meta_sex_estimate_pp_l_pb_sym, meta_cond_estimate_pp_l_pb_sym, meta_sex_cond_estimate_pp_l_pb_sym,
+     meta_base_estimate_pp_l_pb_asym, meta_sex_estimate_pp_l_pb_asym, meta_cond_estimate_pp_l_pb_asym, meta_sex_cond_estimate_pp_l_pb_asym,
      meta_base_estimate_pp_c, meta_sex_estimate_pp_c, meta_cond_estimate_pp_c, meta_sex_cond_estimate_pp_c,
-     meta_base_estimate_pp_c_pb, meta_sex_estimate_pp_c_pb, meta_cond_estimate_pp_c_pb, meta_sex_cond_estimate_pp_c_pb,
+     meta_base_estimate_pp_c_pb_sym, meta_sex_estimate_pp_c_pb_sym, meta_cond_estimate_pp_c_pb_sym, meta_sex_cond_estimate_pp_c_pb_sym,
+     meta_base_estimate_pp_c_pb_asym, meta_sex_estimate_pp_c_pb_asym, meta_cond_estimate_pp_c_pb_asym, meta_sex_cond_estimate_pp_c_pb_asym,
      meta_base_estimate_pp_l_p, meta_sex_estimate_pp_l_p, meta_cond_estimate_pp_l_p, meta_sex_cond_estimate_pp_l_p,
-     meta_base_estimate_pp_l_pb_p, meta_sex_estimate_pp_l_pb_p, meta_cond_estimate_pp_l_pb_p, meta_sex_cond_estimate_pp_l_pb_p,
+     meta_base_estimate_pp_l_pb_sym_p, meta_sex_estimate_pp_l_pb_sym_p, meta_cond_estimate_pp_l_pb_sym_p, meta_sex_cond_estimate_pp_l_pb_sym_p,
+     meta_base_estimate_pp_l_pb_asym_p, meta_sex_estimate_pp_l_pb_asym_p, meta_cond_estimate_pp_l_pb_asym_p, meta_sex_cond_estimate_pp_l_pb_asym_p,
      meta_base_estimate_pp_c_p, meta_sex_estimate_pp_c_p, meta_cond_estimate_pp_c_p, meta_sex_cond_estimate_pp_c_p,
-     meta_base_estimate_pp_c_pb_p, meta_sex_estimate_pp_c_pb_p, meta_cond_estimate_pp_c_pb_p, meta_sex_cond_estimate_pp_c_pb_p,
+     meta_base_estimate_pp_c_pb_sym_p, meta_sex_estimate_pp_c_pb_sym_p, meta_cond_estimate_pp_c_pb_sym_p, meta_sex_cond_estimate_pp_c_pb_sym_p,
+     meta_base_estimate_pp_c_pb_asym_p, meta_sex_estimate_pp_c_pb_asym_p, meta_cond_estimate_pp_c_pb_asym_p, meta_sex_cond_estimate_pp_c_pb_asym_p,
      meta_base_estimate_lower_pp_l, meta_sex_estimate_lower_pp_l, meta_cond_estimate_lower_pp_l, meta_sex_cond_estimate_lower_pp_l,
-     meta_base_estimate_lower_pp_l_pb, meta_sex_estimate_lower_pp_l_pb, meta_cond_estimate_lower_pp_l_pb, meta_sex_cond_estimate_lower_pp_l_pb,
+     meta_base_estimate_lower_pp_l_pb_sym, meta_sex_estimate_lower_pp_l_pb_sym, meta_cond_estimate_lower_pp_l_pb_sym, meta_sex_cond_estimate_lower_pp_l_pb_sym,
+     meta_base_estimate_lower_pp_l_pb_asym, meta_sex_estimate_lower_pp_l_pb_asym, meta_cond_estimate_lower_pp_l_pb_asym, meta_sex_cond_estimate_lower_pp_l_pb_asym,
      meta_base_estimate_lower_pp_c, meta_sex_estimate_lower_pp_c, meta_cond_estimate_lower_pp_c, meta_sex_cond_estimate_lower_pp_c,
-     meta_base_estimate_lower_pp_c_pb, meta_sex_estimate_lower_pp_c_pb, meta_cond_estimate_lower_pp_c_pb, meta_sex_cond_estimate_lower_pp_c_pb,
+     meta_base_estimate_lower_pp_c_pb_sym, meta_sex_estimate_lower_pp_c_pb_sym, meta_cond_estimate_lower_pp_c_pb_sym, meta_sex_cond_estimate_lower_pp_c_pb_sym,
+     meta_base_estimate_lower_pp_c_pb_asym, meta_sex_estimate_lower_pp_c_pb_asym, meta_cond_estimate_lower_pp_c_pb_asym, meta_sex_cond_estimate_lower_pp_c_pb_asym,
      meta_base_estimate_upper_pp_l, meta_sex_estimate_upper_pp_l, meta_cond_estimate_upper_pp_l, meta_sex_cond_estimate_upper_pp_l,
-     meta_base_estimate_upper_pp_l_pb, meta_sex_estimate_upper_pp_l_pb, meta_cond_estimate_upper_pp_l_pb, meta_sex_cond_estimate_upper_pp_l_pb,
+     meta_base_estimate_upper_pp_l_pb_sym, meta_sex_estimate_upper_pp_l_pb_sym, meta_cond_estimate_upper_pp_l_pb_sym, meta_sex_cond_estimate_upper_pp_l_pb_sym,
+     meta_base_estimate_upper_pp_l_pb_asym, meta_sex_estimate_upper_pp_l_pb_asym, meta_cond_estimate_upper_pp_l_pb_asym, meta_sex_cond_estimate_upper_pp_l_pb_asym,
      meta_base_estimate_upper_pp_c, meta_sex_estimate_upper_pp_c, meta_cond_estimate_upper_pp_c, meta_sex_cond_estimate_upper_pp_c,
-     meta_base_estimate_upper_pp_c_pb, meta_sex_estimate_upper_pp_c_pb, meta_cond_estimate_upper_pp_c_pb, meta_sex_cond_estimate_upper_pp_c_pb,
+     meta_base_estimate_upper_pp_c_pb_sym, meta_sex_estimate_upper_pp_c_pb_sym, meta_cond_estimate_upper_pp_c_pb_sym, meta_sex_cond_estimate_upper_pp_c_pb_sym,
+     meta_base_estimate_upper_pp_c_pb_asym, meta_sex_estimate_upper_pp_c_pb_asym, meta_cond_estimate_upper_pp_c_pb_asym, meta_sex_cond_estimate_upper_pp_c_pb_asym,
      meta_base_uncertainty_pp_l, meta_sex_uncertainty_pp_l, meta_cond_uncertainty_pp_l, meta_sex_cond_uncertainty_pp_l,
-     meta_base_uncertainty_pp_l_pb, meta_sex_uncertainty_pp_l_pb, meta_cond_uncertainty_pp_l_pb, meta_sex_cond_uncertainty_pp_l_pb,
+     meta_base_uncertainty_pp_l_pb_sym, meta_sex_uncertainty_pp_l_pb_sym, meta_cond_uncertainty_pp_l_pb_sym, meta_sex_cond_uncertainty_pp_l_pb_sym,
+     meta_base_uncertainty_pp_l_pb_asym, meta_sex_uncertainty_pp_l_pb_asym, meta_cond_uncertainty_pp_l_pb_asym, meta_sex_cond_uncertainty_pp_l_pb_asym,
      meta_base_uncertainty_pp_c, meta_sex_uncertainty_pp_c, meta_cond_uncertainty_pp_c, meta_sex_cond_uncertainty_pp_c,
-     meta_base_uncertainty_pp_c_pb, meta_sex_uncertainty_pp_c_pb, meta_cond_uncertainty_pp_c_pb, meta_sex_cond_uncertainty_pp_c_pb,
+     meta_base_uncertainty_pp_c_pb_sym, meta_sex_uncertainty_pp_c_pb_sym, meta_cond_uncertainty_pp_c_pb_sym, meta_sex_cond_uncertainty_pp_c_pb_sym,
+     meta_base_uncertainty_pp_c_pb_asym, meta_sex_uncertainty_pp_c_pb_asym, meta_cond_uncertainty_pp_c_pb_asym, meta_sex_cond_uncertainty_pp_c_pb_asym,
      meta_base_uncertainty_pp_l_p, meta_sex_uncertainty_pp_l_p, meta_cond_uncertainty_pp_l_p, meta_sex_cond_uncertainty_pp_l_p,
-     meta_base_uncertainty_pp_l_pb_p, meta_sex_uncertainty_pp_l_pb_p, meta_cond_uncertainty_pp_l_pb_p, meta_sex_cond_uncertainty_pp_l_pb_p,
+     meta_base_uncertainty_pp_l_pb_sym_p, meta_sex_uncertainty_pp_l_pb_sym_p, meta_cond_uncertainty_pp_l_pb_sym_p, meta_sex_cond_uncertainty_pp_l_pb_sym_p,
+     meta_base_uncertainty_pp_l_pb_asym_p, meta_sex_uncertainty_pp_l_pb_asym_p, meta_cond_uncertainty_pp_l_pb_asym_p, meta_sex_cond_uncertainty_pp_l_pb_asym_p,
      meta_base_uncertainty_pp_c_p, meta_sex_uncertainty_pp_c_p, meta_cond_uncertainty_pp_c_p, meta_sex_cond_uncertainty_pp_c_p,
-     meta_base_uncertainty_pp_c_pb_p, meta_sex_uncertainty_pp_c_pb_p, meta_cond_uncertainty_pp_c_pb_p, meta_sex_cond_uncertainty_pp_c_pb_p,
+     meta_base_uncertainty_pp_c_pb_sym_p, meta_sex_uncertainty_pp_c_pb_sym_p, meta_cond_uncertainty_pp_c_pb_sym_p, meta_sex_cond_uncertainty_pp_c_pb_sym_p,
+     meta_base_uncertainty_pp_c_pb_asym_p, meta_sex_uncertainty_pp_c_pb_asym_p, meta_cond_uncertainty_pp_c_pb_asym_p, meta_sex_cond_uncertainty_pp_c_pb_asym_p,
      b_base, b_bases, b_cond, b_conds, b_sex, b_sexs, b_sex_cond, b_sex_conds,
      pos = ".GlobalEnv")
 }

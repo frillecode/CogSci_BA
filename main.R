@@ -74,6 +74,7 @@ do_publication_bias <- T
 pb_prob_pos <- 0.9 #prob if b above zero and b lower above zero
 pb_prob_null <- 0.2 #prob if b above zero and b lower below zero OR b below zero and b upper above zero
 pb_prob_neg <- 0.6 #prob if b below zero and b upper below zero
+# for symmetrical publication bias pb_prob_pos is also prob if b below zero and b upper below zero
 
 ### Posterior-passing parameters
 # These give you various options wrt posterior passing
