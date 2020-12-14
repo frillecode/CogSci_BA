@@ -1,0 +1,250 @@
+---
+title: "Results"
+author: "Sara Østergaard"
+date: "23/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(pacman)
+pacman::p_load(brms, tidyverse)
+
+### DATA ###
+saved <- read_csv("Results/saved_results_real.csv") %>% 
+  mutate(
+    "b_sex_cond_dist" = abs(b_sex_cond_med-(boot::inv.logit(true_sex_cond)-boot::inv.logit(true_base))),
+    "cot" = str_extract(analysis_type, "[a-z]+_[a-z]+"),
+    "cot" = ifelse(cot == "pp_linear", 0, 1), #cot: 0 = linear, 1 = citation
+    "cot" = as.factor(cot),
+    "pb" = ifelse(is.na(pub_method), 0, 1),
+    "pb" = as.factor(pb)
+  )
+meta <- read_csv("Results/meta_results_real.csv") %>% 
+  mutate(
+    "abs_dist_pp_l" = abs(meta_sex_cond_estimate_pp_l-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_l_pb_sym" = abs(meta_sex_cond_estimate_pp_l_pb_sym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_l_pb_asym" = abs(meta_sex_cond_estimate_pp_l_pb_asym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_c" = abs(meta_sex_cond_estimate_pp_c-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_c_pb_sym" = abs(meta_sex_cond_estimate_pp_c_pb_sym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_c_pb_asym" = abs(meta_sex_cond_estimate_pp_c_pb_asym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base)))
+  )
+
+```
+
+### All true effects
+
+```{r}
+### with only last expt
+saved_exp60 <- saved %>% filter(expt == 60) %>% 
+  mutate(
+    "repeat_id_u" = ifelse(true_sex_cond<0, abs(true_sex_cond*300)+repeat_id, (true_sex_cond*100)+repeat_id)
+  )
+
+mf_h1 <- bf( b_sex_cond_dist| se(b_sex_cond_error) ~ 0 + pb:cot+  (1 + pb:cot | repeat_id_u))
+
+get_prior(mf_h1, data = saved_exp60, family = gaussian())
+
+h1_prior <- c(
+  prior(normal(0,.5), class = b)
+)
+
+h1_m0 <- brm(
+  mf_h1,
+  data = saved_exp60,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = "only",
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1_m0, nsamples = 100)
+
+h1_m1 <- brm(
+  mf_h1,
+  data = saved_exp60,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = T,
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1_m1, nsamples = 100)
+
+summary(h1_m1)
+
+hypothesis(h1_m1,"pb0:cot0<pb0:cot1") # linear chain has smaller error than citation chain
+hypothesis(h1_m1,"pb0:cot0+pb0:cot1<pb1:cot0+pb1:cot1") # smaller error in simulation without pb than with pb
+hypothesis(h1_m1,"pb0:cot0<pb1:cot0")
+hypothesis(h1_m1,"pb0:cot1<pb1:cot1")
+hypothesis(h1_m1,"pb1:cot0<pb1:cot1") # citation chain are more affected by pb than linear
+```
+
+
+### incl. true effect
+```{r}
+### All effects separately
+# -2
+saved_exp60_m2 <- saved_exp60 %>% filter(true_sex_cond == (-2))
+
+h1m2_m0 <- brm(
+  mf_h1,
+  data = saved_exp60_m2,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = "only",
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1m2_m0, nsamples = 100)
+
+h1m2_m1 <- brm(
+  mf_h1,
+  data = saved_exp60_m2,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = T,
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1m2_m1, nsamples = 100)
+
+summary(h1m2_m1)
+
+# -1
+saved_exp60_m1 <- saved_exp60 %>% filter(true_sex_cond == (-1))
+
+h1m1_m0 <- brm(
+  mf_h1,
+  data = saved_exp60_m1,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = "only",
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1m1_m0, nsamples = 100)
+
+h1m1_m1 <- brm(
+  mf_h1,
+  data = saved_exp60_m1,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = T,
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1m1_m1, nsamples = 100)
+
+summary(h1m1_m1)
+
+# 0
+saved_exp60_zero <- saved_exp60 %>% filter(true_sex_cond == 0)
+
+h1z_m0 <- brm(
+  mf_h1,
+  data = saved_exp60_zero,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = "only",
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1z_m0, nsamples = 100)
+
+h1z_m1 <- brm(
+  mf_h1,
+  data = saved_exp60_zero,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = T,
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1z_m1, nsamples = 100)
+
+summary(h1z_m1)
+
+# +1
+saved_exp60_p1 <- saved_exp60 %>% filter(true_sex_cond == 1)
+
+h1p1_m0 <- brm(
+  mf_h1,
+  data = saved_exp60_p1,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = "only",
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1p1_m0, nsamples = 100)
+
+h1p1_m1 <- brm(
+  mf_h1,
+  data = saved_exp60_p1,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = T,
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1p1_m1, nsamples = 100)
+
+summary(h1p1_m1)
+
+# +2
+saved_exp60_p2 <- saved_exp60 %>% filter(true_sex_cond == 2)
+
+h1p2_m0 <- brm(
+  mf_h1,
+  data = saved_exp60_p2,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = "only",
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1p2_m0, nsamples = 100)
+
+h1p2_m1 <- brm(
+  mf_h1,
+  data = saved_exp60_p2,
+  family = gaussian(),
+  prior = h1_prior,
+  sample_prior = T,
+  chains = 2,
+  cores = 2, 
+  iter = 4000
+)
+
+pp_check(h1p2_m1, nsamples = 100)
+
+summary(h1p2_m1)
+```
+
+
