@@ -23,27 +23,16 @@ saved <- read_csv("Results/saved_results_real.csv") %>%
     "pb" = ifelse(is.na(pub_method), 0, 1),
     "pb" = as.factor(pb)
   )
-meta <- read_csv("Results/meta_results_real.csv") %>% 
-  mutate(
-    "abs_dist_pp_l" = abs(meta_sex_cond_estimate_pp_l-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
-    "abs_dist_pp_l_pb_sym" = abs(meta_sex_cond_estimate_pp_l_pb_sym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
-    "abs_dist_pp_l_pb_asym" = abs(meta_sex_cond_estimate_pp_l_pb_asym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
-    "abs_dist_pp_c" = abs(meta_sex_cond_estimate_pp_c-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
-    "abs_dist_pp_c_pb_sym" = abs(meta_sex_cond_estimate_pp_c_pb_sym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
-    "abs_dist_pp_c_pb_asym" = abs(meta_sex_cond_estimate_pp_c_pb_asym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base)))
-  )
 
-```
-
-### All true effects
-
-```{r}
 ### with only last expt
 saved_exp60 <- saved %>% filter(expt == 60) %>% 
   mutate(
     "repeat_id_u" = ifelse(true_sex_cond<0, abs(true_sex_cond*300)+repeat_id, (true_sex_cond*100)+repeat_id)
   )
+```
 
+### All true effects
+```{r}
 mf_h1 <- bf( b_sex_cond_dist| se(b_sex_cond_error) ~ 0 + pb:cot+  (1 + pb:cot | repeat_id_u))
 
 get_prior(mf_h1, data = saved_exp60, family = gaussian())
