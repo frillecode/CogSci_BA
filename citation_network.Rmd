@@ -1,0 +1,214 @@
+---
+title: "citation_network"
+author: "Sara Østergaard"
+date: "20/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+### Packages ###
+library(pacman)
+p_load(tidyverse, igraph, ggraph, patchwork, bibliometrix)
+
+### DATA ###
+M <- convert2df("savedrecs.bib", dbsource = "wos", format = "bibtex") #from world of science
+```
+
+### Filter relevant studies
+```{r}
+cited_list <- data.frame(
+  "citation" = as.character(),
+  "short_ref" = as.character(),
+  "author" = as.character(),
+  "title" = as.character(), 
+  "n_ref" = as.character(),
+  "year" = as.numeric()
+)
+
+for (i in 1:nrow(M)){
+  df <- cbind(M$SR_FULL[i], M$AU[i], M$TI[i], M$NR[i], M$PY[i]) #variables we need
+  cited <- merge(str_split(M$CR[i], ";"), df) #merged with a list of citations
+  colnames(cited) <- c("citation", "short_ref","author", "title", "n_ref", "year") #change colnames
+  
+  #create dataframe
+  if (nrow(cited_list) == 0){
+    cited_list <- cited
+  } else {
+    cited_list <- rbind(cited_list, cited)
+  }
+}
+
+#Add studyID for all citations and study
+cited_list$citedID <- paste(str_extract(cited_list$citation, "[:alpha:]+"), str_extract(cited_list$citation, "\\d+"), sep = "") 
+cited_list$studyID <- paste(str_extract(cited_list$short_ref, "[:alpha:]+"), cited_list$year, sep ="")
+
+#More studies with same studyID
+u <- as.data.frame(unique(cited_list[,c('title','studyID')])) #unique title and studyID
+
+for (study in unique(u$studyID)){
+  u_2 <- u %>% filter(studyID == study)
+  
+  if(length(u_2$title)>1){ #if studyID is same for two papers
+    cited_list <- cited_list %>% filter(!(studyID==study)) #remove all studies with that studyID
+  }
+}
+ 
+#filter by studyID
+cited_list_f <- cited_list %>% 
+  filter(citedID %in% studyID)
+
+#order by year
+cited_list_f$year <- as.character(cited_list_f$year)
+cited_list_f$year <- as.numeric(cited_list_f$year)
+cited_list_f <- cited_list_f[order(cited_list_f$year),]
+
+cited_list$year <- as.character(cited_list$year)
+cited_list$year <- as.numeric(cited_list$year)
+cited_list <- cited_list[order(cited_list$year),]
+```
+
+### Create edgelist
+```{r}
+edges <- data.frame(
+  from = cited_list_f$citedID,
+  to = cited_list_f$studyID,
+  year = cited_list_f$year
+)
+
+edges$from <- as.character(edges$from)
+edges$to <- as.character(edges$to)
+
+#write.csv(edges, "my-edgelist.csv")
+```
+
+###Visualize network
+```{r}
+nodes <- data.frame(id = unique(cited_list$studyID))
+nodes$id <- as.character(nodes$id)
+
+# filer edges
+for (node in nodes$id) {
+  edge <- subset(edges, to == node) #filter one node
+  
+  if(nrow(edge)>0){
+    for (i in 1:nrow(edge)){
+    cite <- edges %>% filter(to == edge$from[i]) #filter all the studies the node cites
+    if(nrow(cite)>0){ #if a study is both cited by the cited study and the node
+      
+      for (c in 1:nrow(cite)){
+        if(cite$from[c] %in% edge$from){
+          edges <- edges[!(edges$from == cite$from[c] & edges$to == edge$to[i]),]
+        }
+      }
+    }
+  }
+  }
+}
+
+# citation-based cot
+cit_net <- graph_from_data_frame(d=edges, vertices=nodes, directed=T)
+
+cit <- ggraph(cit_net, layout = 'linear') +
+  geom_edge_arc(aes()) +
+  geom_node_point()+
+  geom_node_text(aes(label = paste("study", 1:19, sep = "")), angle=90 , hjust=1.5, nudge_y = -0.01) + 
+  ylim(-1.5, 6)+
+  theme_minimal() + 
+  theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank()) + 
+  labs(x="",y="", title = "B")#, subtitle = "Citation-based Chain of Transmission", edge_colour = "StudyID")
+
+# Linear cot
+lin_edges <- data.frame(
+  "from" = nodes$id[1:18],
+  "to" = nodes$id[2:19]
+)
+
+lin_net <- graph_from_data_frame(d=lin_edges, vertices=nodes, directed=T)
+
+lin <- ggraph(lin_net, layout = 'linear') +
+  geom_edge_arc(aes()) +
+  geom_node_point()+
+  geom_node_text(aes(label = paste("study", 1:19, sep = "")), angle=90 , hjust=1.5, nudge_y = -0.01)+
+  ylim(-0.375, 1.5)+
+  theme_minimal()+ 
+  theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank()) + 
+  labs(x="",y="", title = "A")#, subtitle = "Linear Chain of Transmission", edge_colour = "StudyID")
+
+# together in one plot
+lin+cit 
+```
+
+### Visualize network with publication bias
+```{r}
+nodes_pb <- data.frame("id" = paste("study", 1:6, sep = ""))
+
+### LINEAR
+# linear without pb
+lin_pb_0 <- data.frame(
+  "from" = paste("study", 2:6, sep = ""),
+  "to" = paste("study", 1:5, sep="")
+)
+lin_pb_0 <- graph_from_data_frame(d=lin_pb_0, vertices = nodes_pb, directed=T)
+
+p_lin <- ggraph(lin_pb_0, layout = 'linear') +
+  geom_edge_arc(strength = (-1)) +
+  geom_node_point()+
+  geom_node_text(aes(label = name), angle=90 , hjust=1.5, nudge_y = -0.01)+
+  theme_minimal()+ ylim(-.5,2)+
+  theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+#, panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
+  labs(x="",y="", title = "A")#, subtitle = "Linear Chain without Publication Bias")
+
+# linear with pb
+lin_pb <- data.frame(
+  "from" = c(paste("study", 2, sep = ""), paste("study", 3, sep = ""), paste("study", 3:6, sep = "")),
+  "to" = c(paste("study", 1, sep = ""), paste("study", 1, sep = ""), paste("study", 2:5, sep = "")),
+  "pub" = c(1,1,0,1,1,1)
+)
+
+lin_pb <- graph_from_data_frame(d=lin_pb, vertices = nodes_pb, directed=T)
+
+p_lin_pb <- ggraph(lin_pb, layout = 'linear') +
+  geom_edge_arc(aes(colour = as.factor(pub)), strength = -1) +
+  geom_node_point()+
+  geom_node_text(aes(label = name), angle=90 , hjust=1.5, nudge_y = -0.01)+
+  theme_minimal()+ scale_edge_color_manual(values = c("tomato2","black"))+ ylim(-.5,2)+
+  theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+#, panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
+  labs(x="",y="", title = "B", edge_colour = "Posterior Passed")#, subtitle = "Linear Chain with Publication Bias")
+
+### CITATION BASED
+# citation-based without pb
+cit_pb <- data.frame(
+  "from" = c(paste("study", 3:5, sep = ""), 
+           rep(paste("study", 6, sep = ""),4)),
+  "to" = c(rep(paste("study", 1, sep = ""),3), 
+           paste("study", 2:5, sep = "")),
+  "pub" = c(1,1,1,1,0,1,1)
+)
+
+cit_pb <- graph_from_data_frame(d=cit_pb, vertices = nodes_pb, directed=T)
+
+p_cit <- ggraph(cit_pb, layout = 'linear') +
+  geom_edge_arc(strength = -1) +
+  geom_node_point()+
+  geom_node_text(aes(label = name), angle=90 , hjust=1.5, nudge_y = -0.01)+
+  theme_minimal()+ ylim(-.5,2)+
+  theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+#, panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
+  labs(x="",y="", title = "C")#, subtitle = "Citation-Based Chain without Publication Bias")
+
+# citation-based with pb
+p_cit_pb <- ggraph(cit_pb, layout = 'linear') +
+  geom_edge_arc(aes(colour = as.factor(pub)), strength = -1) +
+  geom_node_point()+
+  geom_node_text(aes(label = name), angle=90 , hjust=1.5, nudge_y = -0.01)+
+  theme_minimal()+ scale_edge_color_manual(values = c("tomato2","black"))+ ylim(-.5,2)+
+  theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+#, panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
+  labs(x="",y="", title = "D", edge_colour = "Posterior Passed")# subtitle = "Citation-Based Chain with Publication Bias")
+
+pb_plot <- (p_lin+p_cit)/(p_lin_pb+p_cit_pb)& theme(legend.position = "bottom")
+pb_plot + plot_layout(guides = "collect")
+```
+
