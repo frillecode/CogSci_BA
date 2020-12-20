@@ -1,0 +1,105 @@
+---
+title: "chain"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(pacman)
+p_load(tidyverse, igraph, ggraph, patchwork)
+```
+
+```{r}
+### DATA ###
+saved <- read_csv("Results/saved_results_chain.csv")
+cc_m1 <- read_csv("Results/citation_chain_m1.csv") %>% select(from, to)
+cc0 <- read_csv("Results/citation_chain_0.csv") %>% select(from, to)
+
+```
+### functions
+```{r}
+# Tidy chain
+tidy_chain <- function(edges){
+  nodes <- paste("study", 1:60, sep="")
+  for (node in nodes) {
+    edge <- subset(edges, to == node) #filter one node
+    
+    if(nrow(edge)>0){
+      for (i in 1:nrow(edge)){
+      cite <- edges %>% filter(to == edge$from[i]) #filter all the studies the node cites
+      if(nrow(cite)>0){ #if the cited study cites anyone
+        
+        for (c in 1:nrow(cite)){
+          if(cite$from[c] %in% edge$from){
+            edges <- edges[!(edges$from == cite$from[c] & edges$to == edge$to[i]),]
+          }
+        }
+      }
+    }
+    }
+  }
+  return(edges)
+}
+
+### function for plotting chain
+plot_chain <- function(s,condition,true_effect,cc){
+  #nodes
+  nodes <- paste("study",1:60,sep="")
+  # d = data frame with unpublished studies
+  d <- s %>% filter(true_sex_cond == true_effect,analysis_type == condition) %>% 
+  mutate(
+    "studyID" = paste("study",1:60,sep="")
+  ) %>% 
+  select(studyID, pub_true) %>%
+  filter(pub_true == 0)
+  
+  #tidy the chain with all studies
+  cc_tidy <- tidy_chain(cc)
+  net <- graph_from_data_frame(d=cc_tidy, vertices = nodes, directed=T)
+
+  # remove unpublished studies for cc
+  cc_pb <- cc %>% filter(!(from %in% d$studyID))
+  
+  #tidy the chain with only published studies
+  cc_pb_tidy <- tidy_chain(cc_pb)
+  pb_net <- graph_from_data_frame(d=cc_pb_tidy, vertices = nodes, directed=T)
+  
+  ## plot chains
+  c_pb0 <- ggraph(net, layout = 'linear') +
+    geom_edge_arc(aes()) +
+    geom_node_point()+
+    geom_node_text(aes(label = paste("study", 1:60, sep = "")), angle=90 , hjust=1.5, nudge_y = -0.01)+
+    ylim(-5, 23)+
+    theme_minimal()+ 
+    theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+
+    labs(x="",y="", title = "A")
+  
+  c_pb1 <- ggraph(pb_net, layout = 'linear') +
+    geom_edge_arc(aes()) +
+    geom_node_point()+
+    geom_node_text(aes(label = paste("study", 1:60, sep = "")), angle=90 , hjust=1.5, nudge_y = -0.01)+
+    ylim(-5, 23)+
+    theme_minimal()+ 
+    theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+
+    labs(x="",y="", title = "B")
+  
+  return(c_pb0 + c_pb1)
+  
+}
+
+
+
+
+
+```
+### plot
+```{r}
+m1_sym_p <- plot_chain(s=saved, condition = "pp_citation_pb_sym", true_effect = (-1), cc=cc_m1)
+
+m1_asym_p <- plot_chain(s=saved, condition = "pp_citation_pb_asym", true_effect = (-1), cc=cc_m1)
+
+p0_sym_p <- plot_chain(s=saved, condition = "pp_citation_pb_sym", true_effect = 0, cc=cc_m1)
+
+p0_asym_p <- plot_chain(s=saved, condition = "pp_citation_pb_asym", true_effect = 0, cc=cc_m1)
+```
+
