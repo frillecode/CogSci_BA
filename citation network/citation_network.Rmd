@@ -220,5 +220,7 @@ p_cit_pb <- ggraph(cit_pb, layout = 'linear') +
 
 pb_plot <- (p_lin+p_cit)/(p_lin_pb+p_cit_pb)& theme(legend.position = "bottom")
 pb_plot + plot_layout(guides = "collect")
+
+(p_lin_pb+p_cit_pb& theme(legend.position = "bottom")) + plot_layout(guides = "collect")
 ```
 

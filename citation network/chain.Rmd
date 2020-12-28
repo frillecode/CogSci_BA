@@ -11,9 +11,9 @@ p_load(tidyverse, igraph, ggraph, patchwork)
 
 ```{r}
 ### DATA ###
-saved <- read_csv("Results/saved_results_chain.csv")
-cc_m1 <- read_csv("Results/citation_chain_m1.csv") %>% select(from, to)
-cc0 <- read_csv("Results/citation_chain_0.csv") %>% select(from, to)
+saved <- read_csv("chain_csv/saved_results_chain.csv")
+cc_m1 <- read_csv("chain_csv/citation_chain_m1.csv") %>% select(from, to)
+cc0 <- read_csv("chain_csv/citation_chain_0.csv") %>% select(from, to)
 
 ```
 ### functions
@@ -65,25 +65,25 @@ plot_chain <- function(s,condition,true_effect,cc){
   pb_net <- graph_from_data_frame(d=cc_pb_tidy, vertices = nodes, directed=T)
   
   ## plot chains
-  c_pb0 <- ggraph(net, layout = 'linear') +
+  c_pb0 <<- ggraph(net, layout = 'linear') +
     geom_edge_arc(aes()) +
     geom_node_point()+
     geom_node_text(aes(label = paste("study", 1:60, sep = "")), angle=90 , hjust=1.5, nudge_y = -0.01)+
     ylim(-5, 23)+
     theme_minimal()+ 
     theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+
-    labs(x="",y="", title = "A")
+    labs(x="",y="")#, title = "A")
   
-  c_pb1 <- ggraph(pb_net, layout = 'linear') +
+  c_pb1 <<- ggraph(pb_net, layout = 'linear') +
     geom_edge_arc(aes()) +
     geom_node_point()+
     geom_node_text(aes(label = paste("study", 1:60, sep = "")), angle=90 , hjust=1.5, nudge_y = -0.01)+
     ylim(-5, 23)+
     theme_minimal()+ 
     theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+
-    labs(x="",y="", title = "B")
+    labs(x="",y="")#, title = "B")
   
-  return(c_pb0 + c_pb1)
+  return(c_pb0 / c_pb1)
   
 }
 
@@ -102,4 +102,5 @@ p0_sym_p <- plot_chain(s=saved, condition = "pp_citation_pb_sym", true_effect = 
 
 p0_asym_p <- plot_chain(s=saved, condition = "pp_citation_pb_asym", true_effect = 0, cc=cc_m1)
 ```
+
 
