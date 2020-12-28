@@ -117,8 +117,9 @@ cit <- ggraph(cit_net, layout = 'linear') +
   geom_node_point()+
   geom_node_text(aes(label = paste("study", 1:19, sep = "")), angle=90 , hjust=1.5, nudge_y = -0.01) + 
   ylim(-1.5, 6)+
-  theme_minimal() + 
+  #theme_minimal() + 
   theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank()) + 
+  theme(text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"))+
   labs(x="",y="", title = "B")#, subtitle = "Citation-based Chain of Transmission", edge_colour = "StudyID")
 
 # Linear cot
@@ -134,8 +135,9 @@ lin <- ggraph(lin_net, layout = 'linear') +
   geom_node_point()+
   geom_node_text(aes(label = paste("study", 1:19, sep = "")), angle=90 , hjust=1.5, nudge_y = -0.01)+
   ylim(-0.375, 1.5)+
-  theme_minimal()+ 
+  #theme_minimal()+ 
   theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank()) + 
+  theme(text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"))+
   labs(x="",y="", title = "A")#, subtitle = "Linear Chain of Transmission", edge_colour = "StudyID")
 
 # together in one plot
@@ -158,8 +160,10 @@ p_lin <- ggraph(lin_pb_0, layout = 'linear') +
   geom_edge_arc(strength = (-1)) +
   geom_node_point()+
   geom_node_text(aes(label = name), angle=90 , hjust=1.5, nudge_y = -0.01)+
-  theme_minimal()+ ylim(-.5,2)+
+  #theme_minimal()+ 
+  ylim(-.5,2)+
   theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+#, panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
+  theme(text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"))+
   labs(x="",y="", title = "A")#, subtitle = "Linear Chain without Publication Bias")
 
 # linear with pb
@@ -175,8 +179,10 @@ p_lin_pb <- ggraph(lin_pb, layout = 'linear') +
   geom_edge_arc(aes(colour = as.factor(pub)), strength = -1) +
   geom_node_point()+
   geom_node_text(aes(label = name), angle=90 , hjust=1.5, nudge_y = -0.01)+
-  theme_minimal()+ scale_edge_color_manual(values = c("tomato2","black"))+ ylim(-.5,2)+
+  #theme_minimal()+ 
+  scale_edge_color_manual(values = c("tomato2","black"))+ ylim(-.5,2)+
   theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+#, panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
+  theme(text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"))+
   labs(x="",y="", title = "B", edge_colour = "Posterior Passed")#, subtitle = "Linear Chain with Publication Bias")
 
 ### CITATION BASED
@@ -195,8 +201,10 @@ p_cit <- ggraph(cit_pb, layout = 'linear') +
   geom_edge_arc(strength = -1) +
   geom_node_point()+
   geom_node_text(aes(label = name), angle=90 , hjust=1.5, nudge_y = -0.01)+
-  theme_minimal()+ ylim(-.5,2)+
+  #theme_minimal()+ 
+  ylim(-.5,2)+
   theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+#, panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
+  theme(text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"))+
   labs(x="",y="", title = "C")#, subtitle = "Citation-Based Chain without Publication Bias")
 
 # citation-based with pb
@@ -204,8 +212,10 @@ p_cit_pb <- ggraph(cit_pb, layout = 'linear') +
   geom_edge_arc(aes(colour = as.factor(pub)), strength = -1) +
   geom_node_point()+
   geom_node_text(aes(label = name), angle=90 , hjust=1.5, nudge_y = -0.01)+
-  theme_minimal()+ scale_edge_color_manual(values = c("tomato2","black"))+ ylim(-.5,2)+
+  #theme_minimal()+ 
+  scale_edge_color_manual(values = c("tomato2","black"))+ ylim(-.5,2)+
   theme(axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())+#, panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + 
+  theme(text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"))+
   labs(x="",y="", title = "D", edge_colour = "Posterior Passed")# subtitle = "Citation-Based Chain with Publication Bias")
 
 pb_plot <- (p_lin+p_cit)/(p_lin_pb+p_cit_pb)& theme(legend.position = "bottom")
