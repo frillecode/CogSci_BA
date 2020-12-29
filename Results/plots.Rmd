@@ -1,0 +1,167 @@
+---
+title: "plots"
+author: "Frida Hæstrup"
+date: "21/5/2020"
+output: 
+  md_document:
+    variant: markdown_github
+---
+
+### Load Packages and Data   
+```{r }  
+#warnings=FALSE, message=FALSE
+library(pacman)
+pacman::p_load(
+  tidyverse,
+  gridExtra,
+  patchwork, formattable, knitr, brms
+)
+
+### Load data ###
+data <- read_csv("Results/saved_results_real.csv") %>% select(-c(X1))  
+
+data <- data %>% 
+  mutate(
+    "b_sex_cond_dist" = abs(b_sex_cond_med-(boot::inv.logit(true_sex_cond)-boot::inv.logit(true_base))),
+    "b_sex_cond_lower_scaled" = abs(b_sex_cond_lower-(boot::inv.logit(true_sex_cond)-boot::inv.logit(true_base))),
+    "b_sex_cond_upper_scaled" = abs(b_sex_cond_upper-(boot::inv.logit(true_sex_cond)-boot::inv.logit(true_base))),
+b_sex_cond_mean_unc = abs(b_sex_cond_upper_scaled-b_sex_cond_lower_scaled)
+  )
+
+#meta-results
+meta <- read_csv("Results/meta_results_real.csv") %>% select(-c(X1))  
+
+meta <- meta %>% 
+  mutate(
+    "abs_dist_pp_l" = abs(meta_sex_cond_estimate_pp_l-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_l_pb_asym" = abs(meta_sex_cond_estimate_pp_l_pb_asym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_l_pb_sym" = abs(meta_sex_cond_estimate_pp_l_pb_sym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_c" = abs(meta_sex_cond_estimate_pp_c-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_c_pb_asym" = abs(meta_sex_cond_estimate_pp_c_pb_asym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base))),
+    "abs_dist_pp_c_pb_sym" = abs(meta_sex_cond_estimate_pp_c_pb_sym-(boot::inv.logit(meta_true_sex_cond)-boot::inv.logit(meta_true_base)))
+  )
+```
+
+
+### Plots  
+
+FIGURE 4
+```{r repeat 1, without pb}
+#### PLOTTING ####
+rep1 <- data %>% filter(repeat_id == 1) #only first repeat
+rep1_no_pb <- rep1 %>% filter(analysis_type == "pp_linear" | analysis_type == "pp_citation") #without pb
+rep1_no_pb <- rep1_no_pb[order(rep1_no_pb$analysis_type,decreasing=F),] #fix order for plotting
+
+# Plotting true effect -2
+te_n2_no_pb_plot <- ggplot(data = rep1_no_pb[rep1_no_pb$true_sex_cond == -2,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1) +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 0.5, size = 0.8) +
+  geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), 
+            color = 'black', size = 1) + scale_color_manual(labels = c("Citation", "Linear"), values=c("goldenrod2", "seagreen4", "red", "blue")) + scale_y_continuous(limit= c(-0.7307971, -0.0307971)) + labs(x = "Study number", y = "Interaction Estimate", color = "Chain of Transmission") + theme(axis.title=element_text(family = "serif", size=8), text = element_text(family = "serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90")) 
+
+# Plotting true effect -1
+te_n1_no_pb_plot <- ggplot(data = rep1_no_pb[rep1_no_pb$true_sex_cond == -1,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1) +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 0.5, size = 0.8) +
+  geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), 
+            color = 'black', size = 1) + scale_color_manual(labels = c("Citation", "Linear"), values=c("goldenrod2", "seagreen4", "red", "blue")) + scale_y_continuous(limit= c(-0.5810586, 0.1189414)) + labs(x = "Study number", y = "Interaction Estimate", color = "Chain of Transmission") + theme(axis.title=element_text(family = "serif", size=8), text = element_text(family = "serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90")) 
+
+# Plotting true effect 0
+te_0_no_pb_plot <- ggplot(data = rep1_no_pb[rep1_no_pb$true_sex_cond == 0,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1) +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 0.5, size = 0.8) +
+  geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), 
+            color = 'black', size = 1) + scale_color_manual(labels = c("Citation", "Linear"), values=c("goldenrod2", "seagreen4", "red", "blue")) + scale_y_continuous(limit= c(-0.35, 0.35)) + labs(x = "Study number", y = "Interaction Estimate", color = "Chain of Transmission") + theme(axis.title=element_text(family = "serif", size=8), text = element_text(family = "serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90")) 
+
+# Plotting true effect 1
+te_p1_no_pb_plot <- ggplot(data = rep1_no_pb[rep1_no_pb$true_sex_cond == 1,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1) +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 0.5, size = 0.8) +
+  geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), 
+            color = 'black', size = 1) + scale_color_manual(labels = c("Citation", "Linear"), values=c("goldenrod2", "seagreen4", "red", "blue")) + scale_y_continuous(limit= c(-0.1189414, 0.5810586)) + labs(x = "Study number", y = "Interaction Estimate", color = "Chain of Transmission") + theme(axis.title=element_text(family = "serif", size=8), text = element_text(family = "serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90")) 
+
+# Plotting true effect 2
+te_p2_no_pb_plot <- ggplot(data = rep1_no_pb[rep1_no_pb$true_sex_cond == 2,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1) +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 0.5, size = 0.8) +
+  geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), 
+            color = 'black', size = 1) + scale_color_manual(labels = c("Citation", "Linear"), values=c("goldenrod2", "seagreen4", "red", "blue")) + scale_y_continuous(limit= c(0.0307971, 0.7307971)) + labs(x = "Study number", y = "Interaction Estimate", color = "Chain of Transmission") + theme(axis.title=element_text(family = "serif", size=8), text = element_text(family = "serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90")) 
+
+
+# Arranging plots
+combined_te_no_pb_plot <- te_n2_no_pb_plot + te_n1_no_pb_plot + te_0_no_pb_plot + te_p1_no_pb_plot + te_p2_no_pb_plot + plot_annotation(tag_levels = "A") & theme(legend.position = "bottom")
+combined_te_no_pb_plot + plot_layout(guides = "collect")
+
+
+```
+
+
+FIGURE 5
+```{r repeat 1, with pb}
+rep1 <- data %>% filter(repeat_id == 1) #only first repeat
+
+#citation chain
+rep1_all_cit <- rep1 %>% filter(analysis_type == "pp_citation" | analysis_type == "pp_citation_pb_asym" | analysis_type == "pp_citation_pb_sym")
+rep1_all_cit <- rep1_all_cit[order(rep1_all_cit$analysis_type,decreasing=TRUE),] #fix order for plotting
+
+#linear chain
+rep1_all_lin <- rep1 %>% filter(analysis_type == "pp_linear" | analysis_type == "pp_linear_pb_asym" | analysis_type == "pp_linear_pb_sym")
+rep1_all_lin <- rep1_all_lin[order(rep1_all_lin$analysis_type,decreasing=TRUE),]
+
+
+my_colors <- c("seagreen4", "darkgoldenrod1","red")
+
+# Plotting pp_linear -2 
+pp_l_n2_plot <- ggplot(data = rep1_all_lin[rep1_all_lin$true_sex_cond == -2,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1, position = "jitter") +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 1, size = 0.5) + geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), color = 'black', size = 1) + scale_color_manual(values=my_colors) + scale_y_continuous(limit= c(-0.7307971, -0.0307971)) + labs(x = "Study number", y = "Interaction estimate", color = "Analysis type") + theme(axis.title=element_text(family="serif", size=8), text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"), legend.position = "bottom") 
+
+# Plotting pp_linear 0
+pp_l_0_plot <- ggplot(data = rep1_all_lin[rep1_all_lin$true_sex_cond == 0,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1, position = "jitter") +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 1, size = 0.5) + geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), color = 'black', size = 1) + scale_color_manual(values=my_colors) + scale_y_continuous(limit= c(-0.3, 0.3)) + labs(x = "Study number", y = "Interaction estimate", color = "Analysis type") + theme(axis.title=element_text(family="serif", size=8), text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"), legend.position = "bottom") 
+
+# Plotting pp_linear 2
+pp_l_p2_plot <- ggplot(data = rep1_all_lin[rep1_all_lin$true_sex_cond == 2,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1, position = "jitter") +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 1, size = 0.5) + geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), color = 'black', size = 1) + scale_color_manual(values=my_colors) + scale_y_continuous(limit= c(0.0307971, 0.7307971)) + labs(x = "Study number", y = "Interaction estimate", color = "Analysis type") + theme(axis.title=element_text(family="serif", size=8), text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"), legend.position = "bottom") 
+
+# Plotting pp_citation -2
+pp_c_n2_plot <- ggplot(data = rep1_all_cit[rep1_all_cit$true_sex_cond == -2,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1, position = "jitter") +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 1, size = 0.5) + geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), color = 'black', size = 1) + scale_color_manual(labels = c("None", "Asymmetric", "Symmetric"), values=my_colors) + scale_y_continuous(limit= c(-0.7307971, -0.0307971)) + labs(x = "Study number", y = "Interaction estimate", color = "Publication Bias") + theme(axis.title=element_text(family="serif", size=8), text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"), legend.position = "bottom") 
+
+# Plotting pp_citation 0
+pp_c_0_plot <- ggplot(data = rep1_all_cit[rep1_all_cit$true_sex_cond == 0,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1, position = "jitter") +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 1, size = 0.5) + geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), color = 'black', size = 1) + scale_color_manual(labels = c("None", "Asymmetric", "Symmetric"), values=my_colors) + scale_y_continuous(limit= c(-0.3, 0.3)) + labs(x = "Study number", y = "Interaction estimate", color = "Publication Bias") + theme(axis.title=element_text(family="serif", size=8), text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"), legend.position = "bottom") 
+
+# Plotting pp_citation 2
+pp_c_p2_plot <- ggplot(data = rep1_all_cit[rep1_all_cit$true_sex_cond == 2,]) + 
+  geom_point(aes(x = expt, y = b_sex_cond_med, color = analysis_type), size = 1, position = "jitter") +
+  geom_errorbar(aes(x = expt, ymax = b_sex_cond_upper, ymin = b_sex_cond_lower, color = analysis_type, width = 1), alpha = 1, size = 0.5) + geom_line(aes(x = as.numeric(expt), y = (boot::inv.logit(true_sex_cond) - boot::inv.logit(true_base))), color = 'black', size = 1) + scale_color_manual(labels = c("None", "Asymmetric", "Symmetric"), values=my_colors) + scale_y_continuous(limit= c(0.0307971,  0.7307971)) + labs(x = "Study number", y = "Interaction estimate", color = "Publication Bias") + theme(axis.title=element_text(family="serif", size=8), text=element_text(family="serif"), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"), legend.position = "bottom") 
+
+
+#combining plots for each type of COT
+combined_pp_l_pb_plot <- (pp_l_n2_plot | pp_l_0_plot | pp_l_p2_plot) + plot_layout(guides = "collect") +   plot_annotation(title = "Linear", tag_levels = "A", theme = theme(legend.position = "bottom", plot.title = element_text(family = "serif", size = 12)))
+
+combined_pp_c_pb_plot <- (pp_c_n2_plot | pp_c_0_plot | pp_c_p2_plot) + plot_layout(guides = "collect") + plot_annotation(title = "Citation", tag_levels = "A", theme = theme(legend.position = "bottom", plot.title = element_text(family = "serif", size = 12)))
+
+```
+
+
+FIGURE 6
+```{r uncertainty}
+data_unc <- data %>% 
+  mutate(analysis_type1 = ifelse(is.na(pub_method), analysis_type, str_extract(analysis_type, "[a-z]+_[a-z]+_[a-z]+")))
+data_unc <- data_unc %>% group_by(analysis_type1, expt) %>% 
+  mutate(allte_b_sex_cond_mean_unc = mean(b_sex_cond_mean_unc))
+
+#### PLOTTING ####
+unc_plot <- 
+  ggplot(data = data_unc, aes(x = expt, y = allte_b_sex_cond_mean_unc, color=analysis_type1), size = 1) +
+  geom_point(alpha = 1, size = 0.8) + geom_line(size = 0.2, alpha = 0.7) +
+  labs(x = "Study number", y = "Uncertainty", color = "Chain of Transmission")  + 
+  scale_y_continuous(limit= c(0, 0.2)) + scale_color_manual(labels = c("Citation", "Citation with PB", "Linear", "Linear with PB"), values=c("lightsalmon", "red3", "palegreen2", "seagreen4")) + theme(axis.title=element_text(family="serif", size=10), text=element_text(family="serif", size = 10), panel.background = element_rect(fill = "white"), panel.grid = element_line(colour = "grey90"), legend.position = "bottom") 
+```
+
