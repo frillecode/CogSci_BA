@@ -153,7 +153,7 @@ for (i in 1:length(b_bases)) {
                 # Now that we have all the data_sets we perform the desired analyses over them.
                 # It is in these methods that we start to create the results table. Each entry
                 # in this table corresponds to a single analysis on a single data_set.
-                do_analyses_1()
+                do_analyses()
                 
                 ###
                 ### Remove DLLs #

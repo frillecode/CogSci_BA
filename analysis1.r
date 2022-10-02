@@ -1,4 +1,4 @@
-do_analyses_1 <- function() {
+do_analyses <- function() {
   print(">>>>>>>> Doing analyses")
 
 ## LINEAR CHAIN ##
