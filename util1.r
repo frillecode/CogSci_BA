@@ -171,7 +171,7 @@ prepare_data_vectors <- function() {
   var_pop <<- vector()  
 }
 
-save_analysis_results_1 <- function(type) {
+save_analysis_results <- function(type) {
   repeat_id <<- c(repeat_id, rep(rep, n_experiments_per_repeat))
   expt <<- c(expt, c(1:n_experiments_per_repeat))
   true_base <<- c(true_base, rep(b_base, n_experiments_per_repeat))

@@ -9,7 +9,7 @@ do_analyses <- function() {
     print(">>>>>>>>>>>> Doing posterior passing on linear chain (no pb)")
     # prep columns
     # this function is in util.R
-    save_analysis_results_1("pp_linear")
+    save_analysis_results("pp_linear")
     pub_method <<- c(pub_method, rep(NA, n_experiments_per_repeat))
     
     #set initial prior for beta[4]
@@ -92,7 +92,7 @@ do_analyses <- function() {
       print(">>>>>>>>>>>> Doing posterior passing on linear chain (sym pb)")
       # prep columns
       # this function is in util.R
-      save_analysis_results_1("pp_linear_pb_sym")
+      save_analysis_results("pp_linear_pb_sym")
       pub_method <<- c(pub_method, rep("sym", n_experiments_per_repeat))
       
       #set initial prior for beta[4]
@@ -185,7 +185,7 @@ do_analyses <- function() {
         print(">>>>>>>>>>>> Doing posterior passing on linear chain (asym pb)")
         # prep columns
         # this function is in util.R
-        save_analysis_results_1("pp_linear_pb_asym")
+        save_analysis_results("pp_linear_pb_asym")
         pub_method <<- c(pub_method, rep("asym", n_experiments_per_repeat))
         
         #set initial prior for beta[4]
@@ -285,7 +285,7 @@ do_analyses <- function() {
       print(">>>>>>>>>>>> Doing posterior passing on citation chain (no pb)")
       # prep columns
       # this function is in util.R
-      save_analysis_results_1("pp_citation")
+      save_analysis_results("pp_citation")
       pub_method <<- c(pub_method, rep(NA, n_experiments_per_repeat))
       
       # empty df to save data in each iteration
@@ -414,7 +414,7 @@ do_analyses <- function() {
       print(">>>>>>>>>>>> Doing posterior passing on citation chain (pb sym)")
       # prep columns
       # this function is in util.R
-      save_analysis_results_1("pp_citation_pb_sym")
+      save_analysis_results("pp_citation_pb_sym")
       pub_method <<- c(pub_method, rep("sym", n_experiments_per_repeat))
       
       # empty df to save data in each iteration
@@ -549,7 +549,7 @@ do_analyses <- function() {
       print(">>>>>>>>>>>> Doing posterior passing on citation chain (pb asym)")
       # prep columns
       # this function is in util.R
-      save_analysis_results_1("pp_citation_pb_asym")
+      save_analysis_results("pp_citation_pb_asym")
       pub_method <<- c(pub_method, rep("asym", n_experiments_per_repeat))
       
       # empty df to save data in each iteration
